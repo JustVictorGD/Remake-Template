@@ -14,3 +14,7 @@ signal key_collected(key_id)
 signal key_lost(key_id)
 
 signal paint_collected
+
+# Object Related Stuff
+
+signal speed_changed(speed)

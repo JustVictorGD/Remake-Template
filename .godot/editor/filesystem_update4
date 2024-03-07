@@ -7,3 +7,8 @@ res://areas/template_area.tscn
 res://scenes/objects/example_paint.tscn
 res://scenes/walls.tscn
 res://scenes/objects/normal_door.tscn
+res://gdscripts/player.gd
+res://gdscripts/Singletons/global_signal.gd
+res://speed_changer.gd
+res://scenes/objects/coin.tscn
+res://scenes/objects/speed_changer.tscn

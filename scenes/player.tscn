@@ -34,7 +34,6 @@ one_shot = true
 
 [node name="Camera2D" type="Camera2D" parent="."]
 texture_filter = 2
-zoom = Vector2(1.5, 1.5)
 limit_left = 0
 limit_top = 0
 limit_right = 1600

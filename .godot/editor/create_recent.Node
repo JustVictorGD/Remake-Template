@@ -1,10 +1,10 @@
-TileMap
-Sprite2D
-CanvasGroup
-CollisionShape2D
-Area2D
-Camera2D
 Node2D
+CollisionShape2D
+Sprite2D
+Area2D
+TileMap
+CanvasGroup
+Camera2D
 RemoteTransform2D
 AudioStreamPlayer
 AudioStreamPlayer2D
@@ -12,6 +12,3 @@ Node
 Timer
 StaticBody2D
 ColorRect
-RigidBody2D
-CharacterBody2D
-TextureRect

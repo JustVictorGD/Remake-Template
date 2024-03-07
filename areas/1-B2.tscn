@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://bt1d4nhdfcxie"]
+[gd_scene load_steps=17 format=3 uid="uid://bt1d4nhdfcxie"]
 
 [ext_resource type="PackedScene" uid="uid://h8vx7l2yvik3" path="res://scenes/texture_rect.tscn" id="1_x2j3o"]
 [ext_resource type="PackedScene" uid="uid://cq8nldi1xgl2m" path="res://scenes/objects/checkpoint.tscn" id="2_kq688"]
@@ -15,6 +15,7 @@
 [ext_resource type="PackedScene" uid="uid://prk4v5kp504y" path="res://scenes/objects/normal_door.tscn" id="13_7xj5o"]
 [ext_resource type="PackedScene" uid="uid://bf3aa0chl0e7i" path="res://scenes/objects/golden_door.tscn" id="14_lvw4v"]
 [ext_resource type="PackedScene" uid="uid://6dsa746nbdyd" path="res://scenes/player.tscn" id="15_f11aj"]
+[ext_resource type="PackedScene" uid="uid://deaq7r2mcfprc" path="res://scenes/objects/speed_changer.tscn" id="16_gshio"]
 
 [node name="1-B2" type="Node2D"]
 metadata/_edit_lock_ = true
@@ -40,6 +41,19 @@ position = Vector2(800, 750)
 
 [node name="Checkpoint5" parent="Checkpoints" instance=ExtResource("2_kq688")]
 position = Vector2(1350, 700)
+
+[node name="SpeedChangers" type="Node2D" parent="."]
+
+[node name="speed_changer" parent="SpeedChangers" instance=ExtResource("16_gshio")]
+position = Vector2(425, 825)
+
+[node name="speed_changer2" parent="SpeedChangers" instance=ExtResource("16_gshio")]
+position = Vector2(575, 825)
+speed = 10
+
+[node name="speed_changer3" parent="SpeedChangers" instance=ExtResource("16_gshio")]
+position = Vector2(725, 825)
+speed = 1
 
 [node name="Coins" type="Node2D" parent="."]
 metadata/_edit_lock_ = true

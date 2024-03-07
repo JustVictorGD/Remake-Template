@@ -1,14 +1,15 @@
 extends CharacterBody2D
 
-
-var speed = 4
+@export_category("Player Settings")
+@export var speed = 4
 var death = false
 
 @export_category("Cheats")
 @export var invincible = false # Should be false. Change to true for testing.
 @export var can_teleport = false
 
-
+func _ready():
+	GlobalSignal.speed_changed.connect(speed_changed)
 
 func _physics_process(delta):
 	if death == false:
@@ -89,3 +90,6 @@ func _on_extra_100_ms_timeout():
 func _on_player_area_entered(area: Area2D):
 	if area.has_method("touched_by_player"):
 		area.touched_by_player()
+
+func speed_changed(new_speed):
+	speed = new_speed
