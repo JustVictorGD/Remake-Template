@@ -12,3 +12,4 @@ res://gdscripts/Singletons/global_signal.gd
 res://speed_changer.gd
 res://scenes/objects/coin.tscn
 res://scenes/objects/speed_changer.tscn
+res://gdscripts/speed_changer.gd
