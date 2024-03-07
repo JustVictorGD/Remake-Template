@@ -1,0 +1,345 @@
+[gd_scene load_steps=16 format=3 uid="uid://bt1d4nhdfcxie"]
+
+[ext_resource type="PackedScene" uid="uid://h8vx7l2yvik3" path="res://scenes/texture_rect.tscn" id="1_x2j3o"]
+[ext_resource type="PackedScene" uid="uid://cq8nldi1xgl2m" path="res://scenes/objects/checkpoint.tscn" id="2_kq688"]
+[ext_resource type="PackedScene" uid="uid://c1pak286uk8in" path="res://scenes/objects/coin.tscn" id="3_1f4l3"]
+[ext_resource type="PackedScene" uid="uid://dbgh5lttxhbsm" path="res://scenes/objects/key.tscn" id="4_yjuf5"]
+[ext_resource type="PackedScene" uid="uid://cxhehbgjg65bh" path="res://scenes/objects/blue_enemy.tscn" id="5_lsl2n"]
+[ext_resource type="Script" path="res://gdscripts/Scene 1 groups/Group 1.gd" id="6_goglo"]
+[ext_resource type="Script" path="res://gdscripts/Scene 1 groups/Group 2.gd" id="7_gdg3e"]
+[ext_resource type="Script" path="res://gdscripts/Scene 1 groups/Group3.gd" id="8_ln65e"]
+[ext_resource type="Script" path="res://gdscripts/Scene 1 groups/Group4.gd" id="9_gea4f"]
+[ext_resource type="Script" path="res://gdscripts/Scene 1 groups/Group5.gd" id="10_yuvdx"]
+[ext_resource type="Script" path="res://gdscripts/Scene 1 groups/Group6.gd" id="11_vtvt0"]
+[ext_resource type="PackedScene" uid="uid://x84mjtv2w2ia" path="res://scenes/objects/finish.tscn" id="12_vmvvl"]
+[ext_resource type="PackedScene" uid="uid://prk4v5kp504y" path="res://scenes/objects/normal_door.tscn" id="13_7xj5o"]
+[ext_resource type="PackedScene" uid="uid://bf3aa0chl0e7i" path="res://scenes/objects/golden_door.tscn" id="14_lvw4v"]
+[ext_resource type="PackedScene" uid="uid://6dsa746nbdyd" path="res://scenes/player.tscn" id="15_f11aj"]
+
+[node name="1-B2" type="Node2D"]
+metadata/_edit_lock_ = true
+
+[node name="TextureRect" parent="." instance=ExtResource("1_x2j3o")]
+
+[node name="Checkpoints" type="Node2D" parent="."]
+metadata/_edit_lock_ = true
+
+[node name="Checkpoint" parent="Checkpoints" instance=ExtResource("2_kq688")]
+position = Vector2(250, 850)
+scale = Vector2(2, 2)
+selection_state = 2
+
+[node name="Checkpoint2" parent="Checkpoints" instance=ExtResource("2_kq688")]
+position = Vector2(250, 300)
+
+[node name="Checkpoint3" parent="Checkpoints" instance=ExtResource("2_kq688")]
+position = Vector2(800, 250)
+
+[node name="Checkpoint4" parent="Checkpoints" instance=ExtResource("2_kq688")]
+position = Vector2(800, 750)
+
+[node name="Checkpoint5" parent="Checkpoints" instance=ExtResource("2_kq688")]
+position = Vector2(1350, 700)
+
+[node name="Coins" type="Node2D" parent="."]
+metadata/_edit_lock_ = true
+
+[node name="Coin50" parent="Coins" instance=ExtResource("3_1f4l3")]
+position = Vector2(675, 475)
+
+[node name="Coin51" parent="Coins" instance=ExtResource("3_1f4l3")]
+position = Vector2(625, 475)
+
+[node name="Coin52" parent="Coins" instance=ExtResource("3_1f4l3")]
+position = Vector2(675, 525)
+
+[node name="Coin53" parent="Coins" instance=ExtResource("3_1f4l3")]
+position = Vector2(625, 525)
+
+[node name="Coin54" parent="Coins" instance=ExtResource("3_1f4l3")]
+position = Vector2(975, 475)
+
+[node name="Coin55" parent="Coins" instance=ExtResource("3_1f4l3")]
+position = Vector2(925, 475)
+
+[node name="Coin56" parent="Coins" instance=ExtResource("3_1f4l3")]
+position = Vector2(975, 525)
+
+[node name="Coin57" parent="Coins" instance=ExtResource("3_1f4l3")]
+position = Vector2(925, 525)
+
+[node name="Keys" type="Node2D" parent="."]
+metadata/_edit_lock_ = true
+
+[node name="Key" parent="Keys" instance=ExtResource("4_yjuf5")]
+position = Vector2(250, 600)
+key_id = 0
+
+[node name="StaticEnemies" type="Node2D" parent="."]
+metadata/_edit_lock_ = true
+
+[node name="BlueEnemy" parent="StaticEnemies" instance=ExtResource("5_lsl2n")]
+position = Vector2(250, 500)
+
+[node name="BlueEnemy2" parent="StaticEnemies" instance=ExtResource("5_lsl2n")]
+position = Vector2(1350, 500)
+
+[node name="MovingEnemies" type="Node2D" parent="."]
+metadata/_edit_lock_ = true
+
+[node name="Group1" type="Node2D" parent="MovingEnemies"]
+script = ExtResource("6_goglo")
+metadata/_edit_lock_ = true
+
+[node name="BlueEnemy" parent="MovingEnemies/Group1" instance=ExtResource("5_lsl2n")]
+position = Vector2(525, 315)
+
+[node name="BlueEnemy2" parent="MovingEnemies/Group1" instance=ExtResource("5_lsl2n")]
+position = Vector2(575, 315)
+
+[node name="BlueEnemy3" parent="MovingEnemies/Group1" instance=ExtResource("5_lsl2n")]
+position = Vector2(725, 315)
+
+[node name="BlueEnemy4" parent="MovingEnemies/Group1" instance=ExtResource("5_lsl2n")]
+position = Vector2(775, 315)
+
+[node name="BlueEnemy5" parent="MovingEnemies/Group1" instance=ExtResource("5_lsl2n")]
+position = Vector2(925, 315)
+
+[node name="BlueEnemy6" parent="MovingEnemies/Group1" instance=ExtResource("5_lsl2n")]
+position = Vector2(975, 315)
+
+[node name="Group2" type="Node2D" parent="MovingEnemies"]
+script = ExtResource("7_gdg3e")
+metadata/_edit_lock_ = true
+
+[node name="BlueEnemy" parent="MovingEnemies/Group2" instance=ExtResource("5_lsl2n")]
+position = Vector2(625, 685)
+
+[node name="BlueEnemy2" parent="MovingEnemies/Group2" instance=ExtResource("5_lsl2n")]
+position = Vector2(675, 685)
+
+[node name="BlueEnemy3" parent="MovingEnemies/Group2" instance=ExtResource("5_lsl2n")]
+position = Vector2(825, 685)
+
+[node name="BlueEnemy4" parent="MovingEnemies/Group2" instance=ExtResource("5_lsl2n")]
+position = Vector2(875, 685)
+
+[node name="BlueEnemy5" parent="MovingEnemies/Group2" instance=ExtResource("5_lsl2n")]
+position = Vector2(1025, 685)
+
+[node name="BlueEnemy6" parent="MovingEnemies/Group2" instance=ExtResource("5_lsl2n")]
+position = Vector2(1075, 685)
+
+[node name="Group3" type="Node2D" parent="MovingEnemies"]
+script = ExtResource("8_ln65e")
+metadata/_edit_lock_ = true
+
+[node name="BlueEnemy" parent="MovingEnemies/Group3" instance=ExtResource("5_lsl2n")]
+position = Vector2(515, 330)
+
+[node name="BlueEnemy2" parent="MovingEnemies/Group3" instance=ExtResource("5_lsl2n")]
+position = Vector2(515, 375)
+
+[node name="BlueEnemy3" parent="MovingEnemies/Group3" instance=ExtResource("5_lsl2n")]
+position = Vector2(515, 525)
+
+[node name="BlueEnemy4" parent="MovingEnemies/Group3" instance=ExtResource("5_lsl2n")]
+position = Vector2(515, 570)
+
+[node name="Group4" type="Node2D" parent="MovingEnemies"]
+script = ExtResource("9_gea4f")
+metadata/_edit_lock_ = true
+
+[node name="BlueEnemy" parent="MovingEnemies/Group4" instance=ExtResource("5_lsl2n")]
+position = Vector2(1085, 425)
+
+[node name="BlueEnemy2" parent="MovingEnemies/Group4" instance=ExtResource("5_lsl2n")]
+position = Vector2(1085, 475)
+
+[node name="BlueEnemy3" parent="MovingEnemies/Group4" instance=ExtResource("5_lsl2n")]
+position = Vector2(1085, 625)
+
+[node name="BlueEnemy4" parent="MovingEnemies/Group4" instance=ExtResource("5_lsl2n")]
+position = Vector2(1085, 675)
+
+[node name="Group5" type="Node2D" parent="MovingEnemies"]
+position = Vector2(250, 500)
+script = ExtResource("10_yuvdx")
+
+[node name="BlueEnemy" parent="MovingEnemies/Group5" instance=ExtResource("5_lsl2n")]
+position = Vector2(-100, -100)
+
+[node name="BlueEnemy2" parent="MovingEnemies/Group5" instance=ExtResource("5_lsl2n")]
+position = Vector2(-75, -75)
+
+[node name="BlueEnemy3" parent="MovingEnemies/Group5" instance=ExtResource("5_lsl2n")]
+position = Vector2(-50, -50)
+
+[node name="BlueEnemy4" parent="MovingEnemies/Group5" instance=ExtResource("5_lsl2n")]
+position = Vector2(-25, -25)
+
+[node name="BlueEnemy5" parent="MovingEnemies/Group5" instance=ExtResource("5_lsl2n")]
+position = Vector2(25, -25)
+
+[node name="BlueEnemy6" parent="MovingEnemies/Group5" instance=ExtResource("5_lsl2n")]
+position = Vector2(50, -50)
+
+[node name="BlueEnemy7" parent="MovingEnemies/Group5" instance=ExtResource("5_lsl2n")]
+position = Vector2(75, -75)
+
+[node name="BlueEnemy8" parent="MovingEnemies/Group5" instance=ExtResource("5_lsl2n")]
+position = Vector2(100, -100)
+
+[node name="BlueEnemy9" parent="MovingEnemies/Group5" instance=ExtResource("5_lsl2n")]
+position = Vector2(-25, 25)
+
+[node name="BlueEnemy10" parent="MovingEnemies/Group5" instance=ExtResource("5_lsl2n")]
+position = Vector2(-50, 50)
+
+[node name="BlueEnemy11" parent="MovingEnemies/Group5" instance=ExtResource("5_lsl2n")]
+position = Vector2(-75, 75)
+
+[node name="BlueEnemy12" parent="MovingEnemies/Group5" instance=ExtResource("5_lsl2n")]
+position = Vector2(-100, 100)
+
+[node name="BlueEnemy13" parent="MovingEnemies/Group5" instance=ExtResource("5_lsl2n")]
+position = Vector2(25, 25)
+
+[node name="BlueEnemy14" parent="MovingEnemies/Group5" instance=ExtResource("5_lsl2n")]
+position = Vector2(50, 50)
+
+[node name="BlueEnemy15" parent="MovingEnemies/Group5" instance=ExtResource("5_lsl2n")]
+position = Vector2(75, 75)
+
+[node name="BlueEnemy16" parent="MovingEnemies/Group5" instance=ExtResource("5_lsl2n")]
+position = Vector2(100, 100)
+
+[node name="Group6" type="Node2D" parent="MovingEnemies"]
+position = Vector2(1350, 500)
+script = ExtResource("11_vtvt0")
+
+[node name="BlueEnemy" parent="MovingEnemies/Group6" instance=ExtResource("5_lsl2n")]
+position = Vector2(-100, -100)
+
+[node name="BlueEnemy2" parent="MovingEnemies/Group6" instance=ExtResource("5_lsl2n")]
+position = Vector2(-75, -75)
+
+[node name="BlueEnemy3" parent="MovingEnemies/Group6" instance=ExtResource("5_lsl2n")]
+position = Vector2(-50, -50)
+
+[node name="BlueEnemy4" parent="MovingEnemies/Group6" instance=ExtResource("5_lsl2n")]
+position = Vector2(-25, -25)
+
+[node name="BlueEnemy5" parent="MovingEnemies/Group6" instance=ExtResource("5_lsl2n")]
+position = Vector2(25, -25)
+
+[node name="BlueEnemy6" parent="MovingEnemies/Group6" instance=ExtResource("5_lsl2n")]
+position = Vector2(50, -50)
+
+[node name="BlueEnemy7" parent="MovingEnemies/Group6" instance=ExtResource("5_lsl2n")]
+position = Vector2(75, -75)
+
+[node name="BlueEnemy8" parent="MovingEnemies/Group6" instance=ExtResource("5_lsl2n")]
+position = Vector2(100, -100)
+
+[node name="BlueEnemy9" parent="MovingEnemies/Group6" instance=ExtResource("5_lsl2n")]
+position = Vector2(-25, 25)
+
+[node name="BlueEnemy10" parent="MovingEnemies/Group6" instance=ExtResource("5_lsl2n")]
+position = Vector2(-50, 50)
+
+[node name="BlueEnemy11" parent="MovingEnemies/Group6" instance=ExtResource("5_lsl2n")]
+position = Vector2(-75, 75)
+
+[node name="BlueEnemy12" parent="MovingEnemies/Group6" instance=ExtResource("5_lsl2n")]
+position = Vector2(-100, 100)
+
+[node name="BlueEnemy13" parent="MovingEnemies/Group6" instance=ExtResource("5_lsl2n")]
+position = Vector2(25, 25)
+
+[node name="BlueEnemy14" parent="MovingEnemies/Group6" instance=ExtResource("5_lsl2n")]
+position = Vector2(50, 50)
+
+[node name="BlueEnemy15" parent="MovingEnemies/Group6" instance=ExtResource("5_lsl2n")]
+position = Vector2(75, 75)
+
+[node name="BlueEnemy16" parent="MovingEnemies/Group6" instance=ExtResource("5_lsl2n")]
+position = Vector2(100, 100)
+
+[node name="Finish" parent="." instance=ExtResource("12_vmvvl")]
+position = Vector2(1350, 150)
+
+[node name="Doors" type="Node2D" parent="."]
+metadata/_edit_lock_ = true
+
+[node name="NormalDoors" type="Node2D" parent="Doors"]
+metadata/_edit_lock_ = true
+
+[node name="NormalDoor5" parent="Doors/NormalDoors" instance=ExtResource("13_7xj5o")]
+position = Vector2(800, 350)
+door_id = 0
+horizontal_size = 2
+vertical_size = 6
+
+[node name="NormalDoor6" parent="Doors/NormalDoors" instance=ExtResource("13_7xj5o")]
+position = Vector2(800, 650)
+door_id = 0
+direction = 2
+horizontal_size = 2
+vertical_size = 6
+
+[node name="NormalDoor3" parent="Doors/NormalDoors" instance=ExtResource("13_7xj5o")]
+position = Vector2(575, 500)
+door_id = 0
+direction = 2
+horizontal_size = 3
+vertical_size = 8
+
+[node name="NormalDoor9" parent="Doors/NormalDoors" instance=ExtResource("13_7xj5o")]
+position = Vector2(450, 500)
+door_id = 0
+horizontal_size = 2
+vertical_size = 4
+
+[node name="NormalDoor10" parent="Doors/NormalDoors" instance=ExtResource("13_7xj5o")]
+position = Vector2(1150, 500)
+door_id = 0
+direction = 2
+horizontal_size = 2
+vertical_size = 4
+
+[node name="NormalDoor7" parent="Doors/NormalDoors" instance=ExtResource("13_7xj5o")]
+position = Vector2(700, 500)
+door_id = 0
+horizontal_size = 2
+vertical_size = 8
+
+[node name="NormalDoor4" parent="Doors/NormalDoors" instance=ExtResource("13_7xj5o")]
+position = Vector2(900, 500)
+door_id = 0
+direction = 2
+horizontal_size = 2
+vertical_size = 8
+
+[node name="NormalDoor8" parent="Doors/NormalDoors" instance=ExtResource("13_7xj5o")]
+position = Vector2(1025, 500)
+door_id = 0
+horizontal_size = 3
+vertical_size = 8
+
+[node name="GoldenDoors" type="Node2D" parent="Doors"]
+metadata/_edit_lock_ = true
+
+[node name="GoldenDoor" parent="Doors/GoldenDoors" instance=ExtResource("14_lvw4v")]
+editor_description = "0 - Up
+1 - Left
+2 - Down
+3 - Right"
+position = Vector2(1350, 300)
+direction = 3
+horizontal_size = 2
+vertical_size = 2
+
+[node name="redCube" parent="." instance=ExtResource("15_f11aj")]
+position = Vector2(250, 850)

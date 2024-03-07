@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://h8vx7l2yvik3"]
+
+[ext_resource type="Texture2D" uid="uid://c2qj5ftpb28v8" path="res://pngs and svgs/Blue floor.png" id="1_oh1xr"]
+
+[node name="TextureRect" type="TextureRect"]
+texture_filter = 1
+offset_right = 1600.0
+offset_bottom = 1000.0
+texture = ExtResource("1_oh1xr")
+stretch_mode = 1
+metadata/_edit_lock_ = true

@@ -1,0 +1,34 @@
+[gd_scene load_steps=8 format=3 uid="uid://cphydkknlvmkw"]
+
+[ext_resource type="Script" path="res://gdscripts/sfx.gd" id="1_hbj4l"]
+[ext_resource type="AudioStream" uid="uid://bixaed40whc7l" path="res://sfx/enemyDeathSoundTrim.mp3" id="2_edari"]
+[ext_resource type="AudioStream" uid="uid://peojlaeccit6" path="res://sfx/checkSoundTrim.mp3" id="3_3bh7o"]
+[ext_resource type="AudioStream" uid="uid://buwqcf6pkxo2b" path="res://sfx/winSound.mp3" id="4_4ohaa"]
+[ext_resource type="AudioStream" uid="uid://b1wpveaf0bjqd" path="res://sfx/coinSoundTrim.mp3" id="5_y48ka"]
+[ext_resource type="AudioStream" uid="uid://bkna2yrofjr3v" path="res://sfx/keySoundTrim.mp3" id="6_kcie3"]
+[ext_resource type="AudioStream" uid="uid://df4fjeckap46x" path="res://sfx/doorSoundTrim.mp3" id="7_6ptxg"]
+
+[node name="SFX" type="Node"]
+script = ExtResource("1_hbj4l")
+
+[node name="EnemyDeath" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_edari")
+
+[node name="Checkpoint" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_3bh7o")
+
+[node name="Finish" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_4ohaa")
+
+[node name="Coin" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_y48ka")
+
+[node name="Key" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("6_kcie3")
+
+[node name="OpenDoor" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("7_6ptxg")
+
+[node name="CloseDoor" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("7_6ptxg")
+volume_db = -6.0

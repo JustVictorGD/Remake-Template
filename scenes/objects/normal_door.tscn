@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=3 uid="uid://prk4v5kp504y"]
+
+[ext_resource type="Texture2D" uid="uid://mqibywiyob8y" path="res://pngs and svgs/Blank pixel.png" id="1_y0iji"]
+[ext_resource type="Script" path="res://gdscripts/normal_door.gd" id="1_y51up"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_pnec1"]
+size = Vector2(2, 2)
+
+[node name="NormalDoor" type="StaticBody2D"]
+script = ExtResource("1_y51up")
+
+[node name="Outline" type="Sprite2D" parent="."]
+modulate = Color(0.266667, 0.266667, 0.266667, 1)
+scale = Vector2(56, 56)
+texture = ExtResource("1_y0iji")
+
+[node name="Filling" type="Sprite2D" parent="."]
+modulate = Color(0.6, 0.6, 0.6, 1)
+scale = Vector2(44, 44)
+texture = ExtResource("1_y0iji")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_pnec1")

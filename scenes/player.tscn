@@ -1,0 +1,60 @@
+[gd_scene load_steps=5 format=3 uid="uid://6dsa746nbdyd"]
+
+[ext_resource type="Script" path="res://gdscripts/player.gd" id="1_drj4t"]
+[ext_resource type="Texture2D" uid="uid://mqibywiyob8y" path="res://pngs and svgs/Blank pixel.png" id="2_xn2t2"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hgmi6"]
+size = Vector2(44, 44)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6o1rl"]
+size = Vector2(44, 44)
+
+[node name="redCube" type="CharacterBody2D"]
+collision_mask = 17
+script = ExtResource("1_drj4t")
+can_teleport = true
+
+[node name="Player" type="Area2D" parent="." groups=["Player"]]
+collision_layer = 8
+collision_mask = 31
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
+shape = SubResource("RectangleShape2D_hgmi6")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_6o1rl")
+
+[node name="RespawnTimer" type="Timer" parent="."]
+wait_time = 0.5
+one_shot = true
+
+[node name="Extra50ms" type="Timer" parent="."]
+wait_time = 0.05
+one_shot = true
+
+[node name="Camera2D" type="Camera2D" parent="."]
+texture_filter = 2
+zoom = Vector2(1.5, 1.5)
+limit_left = 0
+limit_top = 0
+limit_right = 1600
+limit_bottom = 1000
+position_smoothing_enabled = true
+
+[node name="CanvasGroup" type="CanvasGroup" parent="."]
+
+[node name="Outline" type="Sprite2D" parent="CanvasGroup"]
+modulate = Color(0.4, 0, 0, 1)
+position = Vector2(-1.90735e-06, -1.90735e-06)
+scale = Vector2(44, 44)
+texture = ExtResource("2_xn2t2")
+
+[node name="Filling" type="Sprite2D" parent="CanvasGroup"]
+modulate = Color(1, 0, 0, 1)
+scale = Vector2(32, 32)
+texture = ExtResource("2_xn2t2")
+
+[connection signal="area_entered" from="Player" to="." method="_on_player_area_entered"]
+[connection signal="area_entered" from="Player" to="." method="_on_area_2d_area_entered"]
+[connection signal="timeout" from="RespawnTimer" to="." method="_on_respawn_timer_timeout"]
+[connection signal="timeout" from="Extra50ms" to="." method="_on_extra_100_ms_timeout"]

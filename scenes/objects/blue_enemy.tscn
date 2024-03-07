@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://cxhehbgjg65bh"]
+
+[ext_resource type="Texture2D" uid="uid://ci8sqq0dl82t1" path="res://pngs and svgs/Blue enemy.png" id="1_xsr0w"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_wg4tb"]
+radius = 9.0
+
+[node name="BlueEnemy" type="Area2D" groups=["Enemies"]]
+collision_layer = 2
+collision_mask = 0
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("1_xsr0w")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_wg4tb")
