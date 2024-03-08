@@ -1,15 +1,1 @@
 res://default_bus_layout.tres
-res://areas/1-B2.tscn
-res://areas/1-A2.tscn
-res://scenes/player.tscn
-res://scenes/sfx.tscn
-res://areas/template_area.tscn
-res://scenes/objects/example_paint.tscn
-res://scenes/walls.tscn
-res://scenes/objects/normal_door.tscn
-res://gdscripts/player.gd
-res://gdscripts/Singletons/global_signal.gd
-res://speed_changer.gd
-res://scenes/objects/coin.tscn
-res://scenes/objects/speed_changer.tscn
-res://gdscripts/speed_changer.gd

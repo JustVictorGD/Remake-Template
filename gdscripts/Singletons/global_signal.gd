@@ -10,11 +10,12 @@ signal update_checkpoint
 
 # Collectibles
 signal coin_requirement_met
+signal coin_requirement_lost
+
 signal key_collected(key_id)
 signal key_lost(key_id)
 
-signal paint_collected
-
 # Object Related Stuff
+signal paint_collected
 
 signal speed_changed(speed)

@@ -1,7 +1,6 @@
 extends Node
 
 
-
 var finish_touched = false
 var respawn_pos = Vector2(250, 850)
 
@@ -31,5 +30,3 @@ func _physics_process(delta):
 			requirement_met = true
 	else:
 		requirement_met = false
-
-
