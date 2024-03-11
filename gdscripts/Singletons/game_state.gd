@@ -22,7 +22,6 @@ var requirement_met = false
 func get_next_id():
 	next_coin_id += 1
 
-
 func _physics_process(delta):
 	if collected_coins.size() + saved_coins.size() > coin_requirement - 1:
 		if not requirement_met:

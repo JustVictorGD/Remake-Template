@@ -30,16 +30,33 @@ func _physics_process(delta):
 	
 	move_and_slide()
 	
+	
 	if position.y < 22:
 		AreaManager.area_up()
+		
+		AreaManager.player_position.x = self.position.x
+		AreaManager.player_position.y = AreaManager.area_size.y * 50 - 22
+	
+	
 	if position.x < 22:
 		AreaManager.area_left()
+		
+		AreaManager.player_position.x = AreaManager.area_size.x * 50 - 22
+		AreaManager.player_position.y = self.position.y
+	
+	
 	if position.y > AreaManager.area_size.y * 50 - 22:
 		AreaManager.area_down()
+		
+		AreaManager.player_position.x = self.position.x
+		AreaManager.player_position.y = 22
+	
+	
 	if position.x > AreaManager.area_size.x * 50 - 22:
 		AreaManager.area_right()
-	
-	AreaManager.player_position = self.position
+		
+		AreaManager.player_position.x = 22
+		AreaManager.player_position.y = self.position.y
 
 
 
