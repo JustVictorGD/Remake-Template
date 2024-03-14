@@ -3,26 +3,16 @@
 [ext_resource type="Script" path="res://gdscripts/player.gd" id="1_drj4t"]
 [ext_resource type="Texture2D" uid="uid://mqibywiyob8y" path="res://pngs and svgs/Blank pixel.png" id="2_xn2t2"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_hgmi6"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4b85p"]
 size = Vector2(44, 44)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_6o1rl"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4lggf"]
 size = Vector2(44, 44)
 
 [node name="redCube" type="CharacterBody2D"]
 collision_mask = 17
 script = ExtResource("1_drj4t")
 can_teleport = true
-
-[node name="Player" type="Area2D" parent="." groups=["Player"]]
-collision_layer = 8
-collision_mask = 31
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
-shape = SubResource("RectangleShape2D_hgmi6")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("RectangleShape2D_6o1rl")
 
 [node name="RespawnTimer" type="Timer" parent="."]
 wait_time = 0.5
@@ -53,7 +43,55 @@ modulate = Color(1, 0, 0, 1)
 scale = Vector2(32, 32)
 texture = ExtResource("2_xn2t2")
 
-[connection signal="area_entered" from="Player" to="." method="_on_area_2d_area_entered"]
-[connection signal="area_entered" from="Player" to="." method="_on_player_area_entered"]
+[node name="Player" type="Area2D" parent="CanvasGroup" groups=["Player"]]
+collision_layer = 8
+collision_mask = 31
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CanvasGroup/Player"]
+shape = SubResource("RectangleShape2D_4b85p")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_4lggf")
+
+[node name="rLeftBottom" type="RayCast2D" parent="."]
+position = Vector2(-20, 0)
+target_position = Vector2(0, 21)
+collision_mask = 3
+collide_with_areas = true
+
+[node name="rLeftTop" type="RayCast2D" parent="."]
+position = Vector2(-20, 0)
+rotation = 3.14159
+target_position = Vector2(0, 21)
+collision_mask = 3
+collide_with_areas = true
+
+[node name="rMiddleBottom" type="RayCast2D" parent="."]
+target_position = Vector2(0, 21)
+collision_mask = 3
+collide_with_areas = true
+collide_with_bodies = false
+
+[node name="rMiddleTop" type="RayCast2D" parent="."]
+rotation = -3.14159
+target_position = Vector2(5.32388e-05, 21)
+collision_mask = 3
+collide_with_areas = true
+
+[node name="rRightBottom" type="RayCast2D" parent="."]
+position = Vector2(20, 0)
+target_position = Vector2(0, 21)
+collision_mask = 3
+collide_with_areas = true
+
+[node name="rRightTop" type="RayCast2D" parent="."]
+position = Vector2(20, 0)
+rotation = -3.14159
+target_position = Vector2(0, 21)
+collision_mask = 3
+collide_with_areas = true
+
 [connection signal="timeout" from="RespawnTimer" to="." method="_on_respawn_timer_timeout"]
 [connection signal="timeout" from="Extra50ms" to="." method="_on_extra_100_ms_timeout"]
+[connection signal="area_entered" from="CanvasGroup/Player" to="." method="_on_area_2d_area_entered"]
+[connection signal="area_entered" from="CanvasGroup/Player" to="." method="_on_player_area_entered"]

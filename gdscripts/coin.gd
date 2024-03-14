@@ -6,7 +6,7 @@ var coin_id = -1
 func _ready():
 	if coin_id not in GameState.coin_data:
 		coin_id = GameState.next_coin_id
-		GameState.get_next_id()
+		GameState.get_next_coin_id()
 		GameState.uncollected_coins.append(coin_id)
 	
 	GlobalSignal.player_respawn.connect(player_respawn)

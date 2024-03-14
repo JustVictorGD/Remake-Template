@@ -1,0 +1,13 @@
+<svg version="1.2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 48" width="60" height="48">
+	<title>1 (3)-svg</title>
+	<style>
+		.s0 { fill: #33ff66 } 
+		.s1 { opacity: .5;fill: #ffffff;stroke: #ffffff;stroke-linecap: round;stroke-linejoin: round;stroke-width: 4 } 
+		.s2 { fill: none;stroke: #00cc66;paint-order:stroke fill markers;stroke-linecap: square;stroke-linejoin: round;stroke-width: 2 } 
+	</style>
+	<g id="Layer">
+		<path id="Layer" fill-rule="evenodd" class="s0" d="m55.6 16.6v13l-13 13h-26l-13-13v-13l13-13h26zm-39 0h26v13-13h-26v13z"/>
+		<path id="Layer" fill-rule="evenodd" class="s1" d="m42.6 29.6v-13h-26"/>
+		<path id="Layer" fill-rule="evenodd" class="s2" d="m55.6 16.6v13l-13 13h-26l-13-13v-13l13-13h26z"/>
+	</g>
+</svg>

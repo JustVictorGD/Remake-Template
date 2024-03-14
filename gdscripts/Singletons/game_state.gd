@@ -11,16 +11,23 @@ var uncollected_coins = []
 var collected_coins = []
 var saved_coins = []
 
+var uncollected_emeralds = []
+var collected_emeralds = []
+
 var coin_data = [uncollected_coins, collected_coins, saved_coins]
-
-
+var emerald_data = [uncollected_emeralds, collected_emeralds]
 
 var next_coin_id = 0
+var next_emerald_id = 0
+
 var coin_requirement = 0
 var requirement_met = false
 
-func get_next_id():
+func get_next_coin_id():
 	next_coin_id += 1
+
+func get_next_emerald_id():
+	next_emerald_id += 1
 
 func _physics_process(delta):
 	if collected_coins.size() + saved_coins.size() > coin_requirement - 1:

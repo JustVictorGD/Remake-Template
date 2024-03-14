@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://cphydkknlvmkw"]
+[gd_scene load_steps=9 format=3 uid="uid://cphydkknlvmkw"]
 
 [ext_resource type="Script" path="res://gdscripts/sfx.gd" id="1_hbj4l"]
 [ext_resource type="AudioStream" uid="uid://bixaed40whc7l" path="res://sfx/enemyDeathSoundTrim.mp3" id="2_edari"]
@@ -7,6 +7,7 @@
 [ext_resource type="AudioStream" uid="uid://b1wpveaf0bjqd" path="res://sfx/coinSoundTrim.mp3" id="5_y48ka"]
 [ext_resource type="AudioStream" uid="uid://bkna2yrofjr3v" path="res://sfx/keySoundTrim.mp3" id="6_kcie3"]
 [ext_resource type="AudioStream" uid="uid://df4fjeckap46x" path="res://sfx/doorSoundTrim.mp3" id="7_6ptxg"]
+[ext_resource type="AudioStream" path="res://sfx/emeraldCollect.mp3" id="8_4igrd"]
 
 [node name="SFX" type="Node"]
 script = ExtResource("1_hbj4l")
@@ -32,3 +33,7 @@ stream = ExtResource("7_6ptxg")
 [node name="CloseDoor" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("7_6ptxg")
 volume_db = -6.0
+
+[node name="Emerald" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("8_4igrd")
+volume_db = 1.874
