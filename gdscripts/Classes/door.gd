@@ -14,6 +14,7 @@ class_name Door
 var closing_speed = 0.5
 var opening_speed = 0.75
 
+var opened = false
 
 func setup_size():
 	outline.scale = Vector2(horizontal_size, vertical_size) * 50 + Vector2(6, 6)
@@ -22,59 +23,66 @@ func setup_size():
 
 
 func close():
-	var tween = create_tween()
-	tween.set_trans(Tween.TRANS_CUBIC)
-	
-	tween.parallel().tween_property(outline, "scale", Vector2(horizontal_size, vertical_size) * 50 + Vector2(6, 6), closing_speed)
-	tween.parallel().tween_property(outline, "position", Vector2.ZERO, closing_speed)
-	
-	tween.parallel().tween_property(filling, "scale", Vector2(horizontal_size, vertical_size) * 50 - Vector2(6, 6), closing_speed)
-	tween.parallel().tween_property(filling, "position", Vector2.ZERO, closing_speed)
-	SFX.play("CloseDoor")
-	collision_shape.set_deferred("disabled", false)
+	if opened:
+		var tween = create_tween()
+		tween.set_trans(Tween.TRANS_CUBIC)
+		
+		tween.parallel().tween_property(outline, "scale", Vector2(horizontal_size, vertical_size) * 50 + Vector2(6, 6), closing_speed)
+		tween.parallel().tween_property(outline, "position", Vector2.ZERO, closing_speed)
+		
+		tween.parallel().tween_property(filling, "scale", Vector2(horizontal_size, vertical_size) * 50 - Vector2(6, 6), closing_speed)
+		tween.parallel().tween_property(filling, "position", Vector2.ZERO, closing_speed)
+		SFX.play("CloseDoor")
+		collision_shape.set_deferred("disabled", false)
+		
+		opened = false
 
 
 func open():
-	var tween = create_tween()
-	tween.set_trans(Tween.TRANS_CUBIC)
-	SFX.play("OpenDoor")
-	collision_shape.set_deferred("disabled", true)
-	
-	if direction == 0:
+	if not opened:
 		
-		tween.parallel().tween_property(filling, "scale", Vector2(filling.scale.x, filling.scale.y - vertical_size * 50), opening_speed)
-		tween.parallel().tween_property(filling, "position", Vector2(0, vertical_size * -25), opening_speed)
+		var tween = create_tween()
+		tween.set_trans(Tween.TRANS_CUBIC)
+		SFX.play("OpenDoor")
+		collision_shape.set_deferred("disabled", true)
 		
-		tween.parallel().tween_property(outline, "scale", Vector2(outline.scale.x, outline.scale.y - vertical_size * 50), opening_speed)
-		tween.parallel().tween_property(outline, "position", Vector2(0, vertical_size * -25), opening_speed)
-	
-	
-	
-	if direction == 1:
+		opened = true
 		
-		tween.parallel().tween_property(filling, "scale", Vector2(filling.scale.x - horizontal_size * 50, filling.scale.y), opening_speed)
-		tween.parallel().tween_property(filling, "position", Vector2(horizontal_size * -25, 0), opening_speed)
+		if direction == 0:
+			
+			tween.parallel().tween_property(filling, "scale", Vector2(filling.scale.x, filling.scale.y - vertical_size * 50), opening_speed)
+			tween.parallel().tween_property(filling, "position", Vector2(0, vertical_size * -25), opening_speed)
+			
+			tween.parallel().tween_property(outline, "scale", Vector2(outline.scale.x, outline.scale.y - vertical_size * 50), opening_speed)
+			tween.parallel().tween_property(outline, "position", Vector2(0, vertical_size * -25), opening_speed)
 		
-		tween.parallel().tween_property(outline, "scale", Vector2(outline.scale.x - horizontal_size * 50, outline.scale.y), opening_speed)
-		tween.parallel().tween_property(outline, "position", Vector2(horizontal_size * -25, 0), opening_speed)
-	
-	
-	
-	if direction == 2:
 		
-		tween.parallel().tween_property(filling, "scale", Vector2(filling.scale.x, filling.scale.y - vertical_size * 50), opening_speed)
-		tween.parallel().tween_property(filling, "position", Vector2(0, vertical_size * 25), opening_speed)
 		
-		tween.parallel().tween_property(outline, "scale", Vector2(outline.scale.x, outline.scale.y - vertical_size * 50), opening_speed)
-		tween.parallel().tween_property(outline, "position", Vector2(0, vertical_size * 25), opening_speed)
-	
-	
-	
-	if direction == 3:
+		if direction == 1:
+			
+			tween.parallel().tween_property(filling, "scale", Vector2(filling.scale.x - horizontal_size * 50, filling.scale.y), opening_speed)
+			tween.parallel().tween_property(filling, "position", Vector2(horizontal_size * -25, 0), opening_speed)
+			
+			tween.parallel().tween_property(outline, "scale", Vector2(outline.scale.x - horizontal_size * 50, outline.scale.y), opening_speed)
+			tween.parallel().tween_property(outline, "position", Vector2(horizontal_size * -25, 0), opening_speed)
 		
-		tween.parallel().tween_property(filling, "scale", Vector2(filling.scale.x - horizontal_size * 50, filling.scale.y), opening_speed)
-		tween.parallel().tween_property(filling, "position", Vector2(horizontal_size * 25, 0), opening_speed)
 		
-		tween.parallel().tween_property(outline, "scale", Vector2(outline.scale.x - horizontal_size * 50, outline.scale.y), opening_speed)
-		tween.parallel().tween_property(outline, "position", Vector2(horizontal_size * 25, 0), opening_speed)
+		
+		if direction == 2:
+			
+			tween.parallel().tween_property(filling, "scale", Vector2(filling.scale.x, filling.scale.y - vertical_size * 50), opening_speed)
+			tween.parallel().tween_property(filling, "position", Vector2(0, vertical_size * 25), opening_speed)
+			
+			tween.parallel().tween_property(outline, "scale", Vector2(outline.scale.x, outline.scale.y - vertical_size * 50), opening_speed)
+			tween.parallel().tween_property(outline, "position", Vector2(0, vertical_size * 25), opening_speed)
+		
+		
+		
+		if direction == 3:
+			
+			tween.parallel().tween_property(filling, "scale", Vector2(filling.scale.x - horizontal_size * 50, filling.scale.y), opening_speed)
+			tween.parallel().tween_property(filling, "position", Vector2(horizontal_size * 25, 0), opening_speed)
+			
+			tween.parallel().tween_property(outline, "scale", Vector2(outline.scale.x - horizontal_size * 50, outline.scale.y), opening_speed)
+			tween.parallel().tween_property(outline, "position", Vector2(horizontal_size * 25, 0), opening_speed)
 

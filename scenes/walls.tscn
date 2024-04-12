@@ -487,6 +487,7 @@ sources/0 = SubResource("TileSetAtlasSource_qb2ji")
 
 [node name="Walls" type="TileMap"]
 modulate = Color(0.701961, 0.701961, 1, 1)
+texture_filter = 2
 tile_set = SubResource("TileSet_0g5ye")
 rendering_quadrant_size = 50
 format = 2

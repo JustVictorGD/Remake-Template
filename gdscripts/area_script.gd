@@ -4,8 +4,10 @@ extends Node2D
 
 var player_scene = preload("res://scenes/player.tscn")
 
+
 func _ready():
 	print("Change has been successful.")
 	var player = player_scene.instantiate()
 	add_child(player)
 	player.position = AreaManager.player_position
+

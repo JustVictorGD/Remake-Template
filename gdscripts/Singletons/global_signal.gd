@@ -4,7 +4,7 @@ extends Node
 signal player_death
 signal player_respawn
 
-# Checkpoint related
+# Checkpoints
 signal checkpoint_touched
 signal update_checkpoint
 

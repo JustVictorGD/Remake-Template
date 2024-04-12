@@ -12,6 +12,23 @@ var current_area_y = 2
 
 var message = "The scene that you're trying to enter either doesn't exist, or doesn't have a correct name. (coming from area_manager.gd)"
 
+
+
+func dir_contents(path):
+	var dir = DirAccess.open(path)
+	if dir:
+		dir.list_dir_begin()
+		var file_name = dir.get_next()
+		while file_name != "":
+			if dir.current_is_dir():
+				print("Found directory: " + file_name)
+			else:
+				print("Found file: " + file_name)
+			file_name = dir.get_next()
+	else:
+		print("An error occurred when trying to access the path.")
+
+
 func new_area_loaded():
 	print("EEEEE")
 
@@ -55,10 +72,10 @@ func decimal_to_letter(decimal):
 
 
 func area_up():
-	if ResourceLoader.exists("res://areas/1-" +\
+	if ResourceLoader.exists("res://levels/level_1/1-" +\
 	decimal_to_letter(current_area_x) + str(current_area_y - 1) + ".tscn"):
 		
-		get_tree().change_scene_to_file("res://areas/1-" +\
+		get_tree().change_scene_to_file("res://levels/level_1/1-" +\
 		decimal_to_letter(current_area_x) + str(current_area_y - 1) + ".tscn")
 		
 		current_area_y -= 1
@@ -68,10 +85,10 @@ func area_up():
 		print(message)
 
 func area_left():
-	if ResourceLoader.exists("res://areas/1-" +\
+	if ResourceLoader.exists("res://levels/level_1/1-" +\
 	decimal_to_letter(current_area_x - 1) + str(current_area_y) + ".tscn"):
 	
-		get_tree().change_scene_to_file("res://areas/1-" +\
+		get_tree().change_scene_to_file("res://levels/level_1/1-" +\
 		decimal_to_letter(current_area_x - 1) + str(current_area_y) + ".tscn")
 		
 		current_area_x -= 1
@@ -82,10 +99,10 @@ func area_left():
 		print(message)
 
 func area_down():
-	if ResourceLoader.exists("res://areas/1-" +\
+	if ResourceLoader.exists("res://levels/level_1/1-" +\
 	decimal_to_letter(current_area_x) + str(current_area_y + 1) + ".tscn"):
 		
-		get_tree().change_scene_to_file("res://areas/1-" +\
+		get_tree().change_scene_to_file("res://levels/level_1/1-" +\
 		decimal_to_letter(current_area_x) + str(current_area_y + 1) + ".tscn")
 		
 		current_area_y += 1
@@ -96,10 +113,10 @@ func area_down():
 		print(message)
 
 func area_right():
-	if ResourceLoader.exists("res://areas/1-" +\
+	if ResourceLoader.exists("res://levels/level_1/1-" +\
 	decimal_to_letter(current_area_x + 1) + str(current_area_y) + ".tscn"):
 		
-		get_tree().change_scene_to_file("res://areas/1-" +\
+		get_tree().change_scene_to_file("res://levels/level_1/1-" +\
 		decimal_to_letter(current_area_x + 1) + str(current_area_y) + ".tscn")
 		
 		current_area_x += 1
@@ -108,3 +125,42 @@ func area_right():
 	
 	else:
 		print(message)
+
+
+
+
+var save_data = {}
+
+func _ready():
+	
+	var dir1 = DirAccess.open("res://levels")
+	dir1.list_dir_begin()
+	var main_folder = dir1.get_next()
+	
+	
+	
+	while main_folder.is_empty() == false:
+		if main_folder != "ignored_files":
+			
+			save_data[str(main_folder)] = {}
+		main_folder = dir1.get_next()
+	
+	
+	
+	for level in save_data:
+		
+		var dir2 = DirAccess.open("res://levels/" + str(level))
+		dir2.list_dir_begin()
+		var level_folder = dir2.get_next()
+		
+		
+		while level_folder.is_empty() == false:
+			save_data[str(level)][str(level_folder)] = {}
+			level_folder = dir2.get_next()
+		
+		
+	
+	
+	
+	print(save_data)
+	
