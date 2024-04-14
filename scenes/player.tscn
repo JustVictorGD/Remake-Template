@@ -21,7 +21,7 @@ collision_mask = 31
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
 shape = SubResource("RectangleShape2D_hgmi6")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="WallCollision" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_6o1rl")
 
 [node name="RespawnTimer" type="Timer" parent="."]

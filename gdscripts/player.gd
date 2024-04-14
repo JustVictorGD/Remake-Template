@@ -19,7 +19,7 @@ func _on_area_2d_area_entered(area):
 	if "Enemies" in area.get_groups() and invincible == false:
 		enemy_death()
 	
-	if "Finish" in area.get_groups() and GameState.collected_coins.size() + GameState.saved_coins.size() >= GameState.coin_requirement:
+	if "Finish" in area.get_groups() and AreaManager.requirement_met:
 		if not GameState.finish_touched:
 			win()
 

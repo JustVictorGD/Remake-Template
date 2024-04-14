@@ -56,8 +56,6 @@ func open():
 			tween.parallel().tween_property(outline, "scale", Vector2(outline.scale.x, outline.scale.y - vertical_size * 50), opening_speed)
 			tween.parallel().tween_property(outline, "position", Vector2(0, vertical_size * -25), opening_speed)
 		
-		
-		
 		if direction == 1:
 			
 			tween.parallel().tween_property(filling, "scale", Vector2(filling.scale.x - horizontal_size * 50, filling.scale.y), opening_speed)
@@ -65,8 +63,6 @@ func open():
 			
 			tween.parallel().tween_property(outline, "scale", Vector2(outline.scale.x - horizontal_size * 50, outline.scale.y), opening_speed)
 			tween.parallel().tween_property(outline, "position", Vector2(horizontal_size * -25, 0), opening_speed)
-		
-		
 		
 		if direction == 2:
 			
@@ -76,8 +72,6 @@ func open():
 			tween.parallel().tween_property(outline, "scale", Vector2(outline.scale.x, outline.scale.y - vertical_size * 50), opening_speed)
 			tween.parallel().tween_property(outline, "position", Vector2(0, vertical_size * 25), opening_speed)
 		
-		
-		
 		if direction == 3:
 			
 			tween.parallel().tween_property(filling, "scale", Vector2(filling.scale.x - horizontal_size * 50, filling.scale.y), opening_speed)
@@ -86,3 +80,39 @@ func open():
 			tween.parallel().tween_property(outline, "scale", Vector2(outline.scale.x - horizontal_size * 50, outline.scale.y), opening_speed)
 			tween.parallel().tween_property(outline, "position", Vector2(horizontal_size * 25, 0), opening_speed)
 
+
+func stay_open():
+	collision_shape.set_deferred("disabled", true)
+	opened = true
+	
+	if direction == 0:
+		
+		filling.scale = Vector2(filling.scale.x, filling.scale.y - vertical_size * 50)
+		filling.position = Vector2(0, vertical_size * -25)
+		
+		outline.scale = Vector2(outline.scale.x, outline.scale.y - vertical_size * 50)
+		outline.position = Vector2(0, vertical_size * -25)
+	
+	if direction == 1:
+		
+		filling.scale = Vector2(filling.scale.x - horizontal_size * 50, filling.scale.y)
+		filling.position = Vector2(horizontal_size * -25, 0)
+		
+		outline.scale = Vector2(outline.scale.x - horizontal_size * 50, outline.scale.y)
+		outline.position = Vector2(horizontal_size * -25, 0)
+	
+	if direction == 2:
+		
+		filling.scale = Vector2(filling.scale.x, filling.scale.y - vertical_size * 50)
+		filling.position = Vector2(0, vertical_size * 25)
+		
+		outline.scale = Vector2(outline.scale.x, outline.scale.y - vertical_size * 50)
+		outline.position = Vector2(0, vertical_size * 25)
+	
+	if direction == 3:
+		
+		filling.scale = Vector2(filling.scale.x - horizontal_size * 50, filling.scale.y)
+		filling.position = Vector2(horizontal_size * 25, 0)
+		
+		outline.scale = Vector2(outline.scale.x - horizontal_size * 50, outline.scale.y)
+		outline.position = Vector2(horizontal_size * 25, 0)

@@ -35,3 +35,6 @@ func drop():
 
 func save():
 	pass
+
+func stay_collected():
+	pass

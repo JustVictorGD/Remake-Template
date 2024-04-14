@@ -21,5 +21,5 @@ func touched_by_player():
 		
 		selection_state = 2
 		SFX.play("Checkpoint")
-		if GameState.collected_coins.size() + GameState.saved_coins.size() >= GameState.coin_requirement:
+		if AreaManager.requirement_met:
 			SFX.play("Finish")

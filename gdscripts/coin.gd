@@ -1,38 +1,67 @@
-extends Collectable
+extends Node2D
 
 
 var coin_id = -1
 
+@onready var area_name = get_tree().current_scene.return_name()
+
+
 func _ready():
-	if coin_id not in GameState.coin_data:
-		coin_id = GameState.next_coin_id
-		GameState.get_next_id()
-		GameState.uncollected_coins.append(coin_id)
+	coin_id = AreaManager.next_coin_id
+	AreaManager.next_coin_id += 1
+	
 	
 	GlobalSignal.player_respawn.connect(player_respawn)
 	GlobalSignal.checkpoint_touched.connect(checkpoint_touched)
 	
+	print(area_name)
+	
+	if AreaManager.save_data["level_1"][area_name]["coins"][coin_id] != 0:
+		stay_collected()
 
 
+
+func dont_activate(): # _ready():
+	if coin_id not in AreaManager.save_data["level_1"][area_name]["coins"]:
+		coin_id = AreaManager.next_coin_id
+		AreaManager.get_next_id()
+		AreaManager.save_data["level_1"][area_name]["coins"].append(0)
+	
+	
+
+
+
+func player_respawn():
+	if AreaManager.save_data["level_1"][area_name]["coins"][coin_id] == 1:
+		drop()
 
 func drop():
 	var tween = create_tween()
 	tween.tween_property($Sprite2D,"modulate:a", 1, 0.10)
 	
-	GameState.collected_coins.erase(coin_id)
-	GameState.uncollected_coins.append(coin_id)
+	AreaManager.save_data["level_1"][area_name]["coins"][coin_id] = 0
+	AreaManager.coin_update()
+	
+	$CollisionShape2D.disabled = false
 
-func collect():
+func touched_by_player():
 	var tween = create_tween()
 	tween.tween_property($Sprite2D,"modulate:a", 0, 0.10)
 	
 	SFX.play("Coin")
 	
-	GameState.collected_coins.append(coin_id)
-	GameState.uncollected_coins.erase(coin_id)
+	AreaManager.save_data["level_1"][area_name]["coins"][coin_id] = 1
+	AreaManager.coin_update()
 	GlobalSignal.update_checkpoint.emit()
+	
+	$CollisionShape2D.set_deferred("disabled", true)
 
-func save():
-	GameState.collected_coins.erase(coin_id)
-	GameState.saved_coins.append(coin_id)
+func checkpoint_touched():
+	if AreaManager.save_data["level_1"][area_name]["coins"][coin_id] == 1:
+		AreaManager.save_data["level_1"][area_name]["coins"][coin_id] = 2
+
+func stay_collected():
+	$Sprite2D.modulate.a = 0.0
+	$CollisionShape2D.set_deferred("disabled", true)
+	
 

@@ -10,7 +10,7 @@ func _ready():
 	setup_size()
 
 func requirement_met():
-	collision_shape.disabled = true
+	collision_shape.set_deferred("disabled", true)
 	open()
 
 func player_death():

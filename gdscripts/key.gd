@@ -2,7 +2,7 @@ extends Collectable
 
 
 @export var key_id = -1
-
+var true_id = -1
 
 func collect():
 	var tween = create_tween()
