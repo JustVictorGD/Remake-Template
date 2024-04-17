@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://b5tym5xr3uqcc"]
+
+[ext_resource type="Script" path="res://gdscripts/area_script.gd" id="1_x2qga"]
+
+[node name="Abyss" type="Node2D"]
+script = ExtResource("1_x2qga")
+coordinates = Vector2i(0, 1)

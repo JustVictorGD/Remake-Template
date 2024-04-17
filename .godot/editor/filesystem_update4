@@ -1,3 +1,4 @@
+res://default_bus_layout.tres
 res://levels/level_1/1-A1.tscn
 res://levels/level_1/1-B1.tscn
 res://levels/level_1/1-A2.tscn
@@ -18,4 +19,6 @@ res://levels/level_2/2-A1.tscn
 res://levels/level_2/2-B1.tscn
 res://gdscripts/Singletons/area_manager.gd
 res://gdscripts/area_script.gd
-res://gdscripts/coin.gd
+res://gdscripts/player.gd
+res://levels/level_1/StartingRoom.tscn
+res://levels/level_1/abyss.tscn

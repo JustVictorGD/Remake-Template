@@ -6,6 +6,7 @@
 
 [node name="1-B1" type="Node2D"]
 script = ExtResource("1_61tv8")
+coordinates = Vector2i(1, 1)
 
 [node name="TextureRect" parent="." instance=ExtResource("2_mkf4o")]
 

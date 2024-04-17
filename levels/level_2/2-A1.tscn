@@ -1,9 +1,11 @@
-[gd_scene load_steps=3 format=3 uid="uid://tgm1tpg667kv"]
+[gd_scene load_steps=4 format=3 uid="uid://tgm1tpg667kv"]
 
 [ext_resource type="PackedScene" uid="uid://h8vx7l2yvik3" path="res://scenes/texture_rect.tscn" id="1_dguv1"]
+[ext_resource type="Script" path="res://gdscripts/area_script.gd" id="1_i88on"]
 [ext_resource type="PackedScene" uid="uid://b18add8j0n6h0" path="res://scenes/walls.tscn" id="2_vgga6"]
 
-[node name="TemplateArea" type="Node2D"]
+[node name="2-A1" type="Node2D"]
+script = ExtResource("1_i88on")
 
 [node name="TextureRect" parent="." instance=ExtResource("1_dguv1")]
 
