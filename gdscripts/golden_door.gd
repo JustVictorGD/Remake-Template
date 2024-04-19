@@ -8,6 +8,9 @@ func _ready():
 	GlobalSignal.player_death.connect(player_death)
 	
 	setup_size()
+	
+	if AreaManager.requirement_met:
+		stay_open()
 
 func requirement_met():
 	collision_shape.set_deferred("disabled", true)

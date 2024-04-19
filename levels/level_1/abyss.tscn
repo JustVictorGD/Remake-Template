@@ -1,7 +1,9 @@
 [gd_scene load_steps=2 format=3 uid="uid://b5tym5xr3uqcc"]
 
-[ext_resource type="Script" path="res://gdscripts/area_script.gd" id="1_x2qga"]
+[ext_resource type="Script" path="res://gdscripts/area_script.gd" id="1_75ty8"]
 
 [node name="Abyss" type="Node2D"]
-script = ExtResource("1_x2qga")
+script = ExtResource("1_75ty8")
 coordinates = Vector2i(0, 1)
+
+[node name="Coins" type="Node2D" parent="."]

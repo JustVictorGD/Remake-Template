@@ -12,8 +12,12 @@ func _ready():
 	player.position = AreaManager.player_position
 	
 	AreaManager.next_coin_id = 0
+	AreaManager.current_area = self.name
+	
 	AreaManager.current_coordinates = self.coordinates
-	AreaManager.current_level = str(scene_file_path.trim_suffix("/" + str(name) + ".tscn").trim_prefix("res://levels/"))
+	AreaManager.current_level = str(scene_file_path.get_slice("/", 3))
+	
+	print(scene_file_path.get_slice("/", 3))
 	
 	# print(scene_file_path) # retuns "res://levels/level_1/1-B2.tscn"
 	#print(scene_file_path.trim_suffix("/" + str(name) + ".tscn")) # returns "res://levels/level_1"

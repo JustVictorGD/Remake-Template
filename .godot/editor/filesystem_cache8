@@ -1,12 +1,13 @@
 ea4bc82a6ad023ab7ee23ee620429895
-::res://::1713374046
-default_bus_layout.tres::AudioBusLayout::247906460729181115::1713374046::0::1::::<><>::
-::res://gdscripts/::1713377114
-area_script.gd::GDScript::-1::1713376481::0::1::::<>Node2D<>::
+::res://::1713540469
+default_bus_layout.tres::AudioBusLayout::247906460729181115::1713529848::0::1::::<><>::
+example_paint.tscn::PackedScene::2157518878824127726::1713530735::0::1::::<><>::res://gdscripts/paint.gd<>uid://dpikvplfchmdx::::res://pngs and svgs/Paint Outline.png<>uid://tl52ojsgpygw::::res://pngs and svgs/Paint Filling.png
+::res://gdscripts/::1713462901
+area_script.gd::GDScript::-1::1713462773::0::1::::<>Node2D<>::
 checkpoint.gd::GDScript::-1::1709498079::0::1::::<>Area2D<>::
-coin.gd::GDScript::-1::1713298207::0::1::::<>Node2D<>::
+coin.gd::GDScript::-1::1713462901::0::1::::<>Node2D<>::
 finish.gd::GDScript::-1::1712943780::0::1::::<>Area2D<>::
-golden_door.gd::GDScript::-1::1712943863::0::1::::<>Door<>::
+golden_door.gd::GDScript::-1::1713393863::0::1::::<>Door<>::
 key.gd::GDScript::-1::1713022465::0::1::::<>Collectable<>::
 normal_door.gd::GDScript::-1::1709498079::0::1::::<>Door<>::
 paint.gd::GDScript::-1::1709597199::0::1::::<>Collectable<>::
@@ -23,21 +24,31 @@ Group5.gd::GDScript::-1::1709487835::0::1::::<>Node2D<>::
 Group6.gd::GDScript::-1::1709487846::0::1::::<>Node2D<>::
 Group 1.gd::GDScript::-1::1708787143::0::1::::<>Node2D<>::
 Group 2.gd::GDScript::-1::1708787152::0::1::::<>Node2D<>::
-::res://gdscripts/Singletons/::1713377280
-area_manager.gd::GDScript::-1::1713377280::0::1::::<>Node2D<>::
+::res://gdscripts/Singletons/::1713530734
+area_manager.gd::GDScript::-1::1713530734::0::1::::<>Node2D<>::
 game_state.gd::GDScript::-1::1712943612::0::1::::<>Node<>::
 global_signal.gd::GDScript::-1::1713070173::0::1::::<>Node<>::
 ::res://levels/::1710492733
-::res://levels/ignored_files/::1713377280
-template_area.tscn::PackedScene::128794076645943224::1713377280::0::1::::<><>::uid://h8vx7l2yvik3::::res://scenes/texture_rect.tscn<>uid://b18add8j0n6h0::::res://scenes/walls.tscn
-::res://levels/level_1/::1713377280
-1-A1.tscn::PackedScene::5493286464445185428::1713377280::0::1::::<><>::res://gdscripts/area_script.gd<>uid://h8vx7l2yvik3::::res://scenes/texture_rect.tscn<>uid://b18add8j0n6h0::::res://scenes/walls.tscn
-1-A2.tscn::PackedScene::36061568449328458::1713377280::0::1::::<><>::res://gdscripts/area_script.gd<>uid://h8vx7l2yvik3::::res://scenes/texture_rect.tscn<>uid://b18add8j0n6h0::::res://scenes/walls.tscn<>uid://c1pak286uk8in::::res://scenes/objects/coin.tscn
-1-B1.tscn::PackedScene::3646535638830653896::1713377280::0::1::::<><>::res://gdscripts/area_script.gd<>uid://h8vx7l2yvik3::::res://scenes/texture_rect.tscn<>uid://b18add8j0n6h0::::res://scenes/walls.tscn
-1-B2.tscn::PackedScene::3773917167183088112::1713377280::0::1::::<><>::res://gdscripts/area_script.gd<>uid://h8vx7l2yvik3::::res://scenes/texture_rect.tscn<>uid://cq8nldi1xgl2m::::res://scenes/objects/checkpoint.tscn<>uid://x84mjtv2w2ia::::res://scenes/objects/finish.tscn<>uid://deaq7r2mcfprc::::res://scenes/objects/speed_changer.tscn<>uid://c1pak286uk8in::::res://scenes/objects/coin.tscn<>uid://dbgh5lttxhbsm::::res://scenes/objects/key.tscn<>uid://cxhehbgjg65bh::::res://scenes/objects/blue_enemy.tscn<>res://gdscripts/Scene 1 groups/Group 1.gd<>res://gdscripts/Scene 1 groups/Group 2.gd<>res://gdscripts/Scene 1 groups/Group3.gd<>res://gdscripts/Scene 1 groups/Group4.gd<>res://gdscripts/Scene 1 groups/Group5.gd<>res://gdscripts/Scene 1 groups/Group6.gd<>uid://prk4v5kp504y::::res://scenes/objects/normal_door.tscn<>uid://bf3aa0chl0e7i::::res://scenes/objects/golden_door.tscn<>uid://b18add8j0n6h0::::res://scenes/walls.tscn
-::res://levels/level_2/::1713377281
-2-A1.tscn::PackedScene::1346750351632712529::1713377281::0::1::::<><>::uid://h8vx7l2yvik3::::res://scenes/texture_rect.tscn<>res://gdscripts/area_script.gd<>uid://b18add8j0n6h0::::res://scenes/walls.tscn
-2-B1.tscn::PackedScene::8397083894680423742::1713377281::0::1::::<><>::uid://h8vx7l2yvik3::::res://scenes/texture_rect.tscn<>res://gdscripts/area_script.gd<>uid://b18add8j0n6h0::::res://scenes/walls.tscn
+::res://levels/ignored_files/::1713530735
+TemplateArea.tscn::PackedScene::128794076645943224::1713530735::0::1::::<><>::res://gdscripts/area_script.gd<>uid://h8vx7l2yvik3::::res://scenes/texture_rect.tscn<>uid://b18add8j0n6h0::::res://scenes/walls.tscn
+::res://levels/level_1/::1713530735
+1-A1.tscn::PackedScene::5493286464445185428::1713530734::0::1::::<><>::res://gdscripts/area_script.gd<>uid://h8vx7l2yvik3::::res://scenes/texture_rect.tscn<>uid://b18add8j0n6h0::::res://scenes/walls.tscn
+1-A2.tscn::PackedScene::36061568449328458::1713530734::0::1::::<><>::res://gdscripts/area_script.gd<>uid://h8vx7l2yvik3::::res://scenes/texture_rect.tscn<>uid://b18add8j0n6h0::::res://scenes/walls.tscn<>uid://c1pak286uk8in::::res://objects/coin.tscn<>uid://cxhehbgjg65bh::::res://objects/blue_enemy.tscn
+1-B1.tscn::PackedScene::3646535638830653896::1713530734::0::1::::<><>::res://gdscripts/area_script.gd<>uid://h8vx7l2yvik3::::res://scenes/texture_rect.tscn<>uid://b18add8j0n6h0::::res://scenes/walls.tscn
+Abyss.tscn::PackedScene::4532789419556092358::1713530735::0::1::::<><>::res://gdscripts/area_script.gd
+StartingRoom.tscn::PackedScene::3773917167183088112::1713530734::0::1::::<><>::res://gdscripts/area_script.gd<>uid://h8vx7l2yvik3::::res://scenes/texture_rect.tscn<>uid://cq8nldi1xgl2m::::res://objects/checkpoint.tscn<>uid://x84mjtv2w2ia::::res://objects/finish.tscn<>uid://deaq7r2mcfprc::::res://objects/speed_changer.tscn<>uid://c1pak286uk8in::::res://objects/coin.tscn<>uid://dbgh5lttxhbsm::::res://objects/key.tscn<>uid://cxhehbgjg65bh::::res://objects/blue_enemy.tscn<>res://gdscripts/Scene 1 groups/Group 1.gd<>res://gdscripts/Scene 1 groups/Group 2.gd<>res://gdscripts/Scene 1 groups/Group3.gd<>res://gdscripts/Scene 1 groups/Group4.gd<>res://gdscripts/Scene 1 groups/Group5.gd<>res://gdscripts/Scene 1 groups/Group6.gd<>uid://prk4v5kp504y::::res://objects/normal_door.tscn<>uid://bf3aa0chl0e7i::::res://objects/golden_door.tscn<>uid://b18add8j0n6h0::::res://scenes/walls.tscn
+::res://levels/level_2/::1713530735
+2-A1.tscn::PackedScene::1346750351632712529::1713530735::0::1::::<><>::uid://h8vx7l2yvik3::::res://scenes/texture_rect.tscn<>res://gdscripts/area_script.gd<>uid://b18add8j0n6h0::::res://scenes/walls.tscn
+2-B1.tscn::PackedScene::8397083894680423742::1713530735::0::1::::<><>::uid://h8vx7l2yvik3::::res://scenes/texture_rect.tscn<>res://gdscripts/area_script.gd<>uid://b18add8j0n6h0::::res://scenes/walls.tscn
+::res://objects/::1713530735
+blue_enemy.tscn::PackedScene::6401890846078132121::1713530735::0::1::::<><>::uid://ci8sqq0dl82t1::::res://pngs and svgs/Blue enemy.png
+checkpoint.tscn::PackedScene::5964796467258402734::1713530735::0::1::::<><>::res://gdscripts/checkpoint.gd
+coin.tscn::PackedScene::6628736296769645649::1713530735::0::1::::<><>::res://gdscripts/coin.gd<>uid://dmtmjgjwa80vg::::res://pngs and svgs/Hexagonal coin.png
+finish.tscn::PackedScene::1684250594928359996::1713530735::0::1::::<><>::res://gdscripts/finish.gd
+golden_door.tscn::PackedScene::2795168795504035120::1713530735::0::1::::<><>::res://gdscripts/golden_door.gd<>uid://mqibywiyob8y::::res://pngs and svgs/Blank pixel.png
+key.tscn::PackedScene::7242316362010627516::1713530735::0::1::::<><>::uid://c4pk2e230h3he::::res://pngs and svgs/Key.png<>res://gdscripts/key.gd
+normal_door.tscn::PackedScene::1088587184150502390::1713530735::0::1::::<><>::uid://mqibywiyob8y::::res://pngs and svgs/Blank pixel.png<>res://gdscripts/normal_door.gd
+speed_changer.tscn::PackedScene::7441046978075436680::1713530735::0::1::::<><>::res://gdscripts/speed_changer.gd<>uid://cg4afyxjc26np::::res://pngs and svgs/speed_changer_placeholder.png
 ::res://pngs and svgs/::1709892048
 Blank pixel.png::CompressedTexture2D::875784984399590254::1709261321::1709261324::1::::<><>::
 Blank walls.png::CompressedTexture2D::485445385380045511::1709834952::1709834953::1::::<><>::
@@ -54,21 +65,11 @@ speed_changer_placeholder-fast.png::CompressedTexture2D::2727917563630472177::17
 speed_changer_placeholder-normal.png::CompressedTexture2D::682271373938343336::1709868534::1709868534::1::::<><>::
 speed_changer_placeholder.png::CompressedTexture2D::5253851609555248413::1709868534::1709868534::1::::<><>::
 Walls.png::CompressedTexture2D::8263222816848167660::1709841009::1709841014::1::::<><>::
-::res://scenes/::1713377281
-player.tscn::PackedScene::2183141918883426359::1713377280::0::1::::<><>::res://gdscripts/player.gd<>uid://mqibywiyob8y::::res://pngs and svgs/Blank pixel.png
-sfx.tscn::PackedScene::5841587772730961554::1713377280::0::1::::<><>::res://gdscripts/sfx.gd<>uid://bixaed40whc7l::::res://sfx/enemyDeathSoundTrim.mp3<>uid://peojlaeccit6::::res://sfx/checkSoundTrim.mp3<>uid://buwqcf6pkxo2b::::res://sfx/winSound.mp3<>uid://b1wpveaf0bjqd::::res://sfx/coinSoundTrim.mp3<>uid://bkna2yrofjr3v::::res://sfx/keySoundTrim.mp3<>uid://df4fjeckap46x::::res://sfx/doorSoundTrim.mp3
+::res://scenes/::1713530735
+player.tscn::PackedScene::2183141918883426359::1713530734::0::1::::<><>::res://gdscripts/player.gd<>uid://mqibywiyob8y::::res://pngs and svgs/Blank pixel.png
+sfx.tscn::PackedScene::5841587772730961554::1713530734::0::1::::<><>::res://gdscripts/sfx.gd<>uid://bixaed40whc7l::::res://sfx/enemyDeathSoundTrim.mp3<>uid://peojlaeccit6::::res://sfx/checkSoundTrim.mp3<>uid://buwqcf6pkxo2b::::res://sfx/winSound.mp3<>uid://b1wpveaf0bjqd::::res://sfx/coinSoundTrim.mp3<>uid://bkna2yrofjr3v::::res://sfx/keySoundTrim.mp3<>uid://df4fjeckap46x::::res://sfx/doorSoundTrim.mp3
 texture_rect.tscn::PackedScene::560764200457824344::1709782207::0::1::::<><>::uid://c2qj5ftpb28v8::::res://pngs and svgs/Blue floor.png
-walls.tscn::PackedScene::4279460650539100763::1713377281::0::1::::<><>::uid://dpy1cp3nek2j5::::res://pngs and svgs/Walls.png
-::res://scenes/objects/::1713377281
-blue_enemy.tscn::PackedScene::6401890846078132121::1709782206::0::1::::<><>::uid://ci8sqq0dl82t1::::res://pngs and svgs/Blue enemy.png
-checkpoint.tscn::PackedScene::5964796467258402734::1713377281::0::1::::<><>::res://gdscripts/checkpoint.gd
-coin.tscn::PackedScene::6628736296769645649::1713377281::0::1::::<><>::res://gdscripts/coin.gd<>uid://dmtmjgjwa80vg::::res://pngs and svgs/Hexagonal coin.png
-example_paint.tscn::PackedScene::2157518878824127726::1713377281::0::1::::<><>::res://gdscripts/paint.gd<>uid://dpikvplfchmdx::::res://pngs and svgs/Paint Outline.png<>uid://tl52ojsgpygw::::res://pngs and svgs/Paint Filling.png
-finish.tscn::PackedScene::1684250594928359996::1713377281::0::1::::<><>::res://gdscripts/finish.gd
-golden_door.tscn::PackedScene::2795168795504035120::1713377281::0::1::::<><>::res://gdscripts/golden_door.gd<>uid://mqibywiyob8y::::res://pngs and svgs/Blank pixel.png
-key.tscn::PackedScene::7242316362010627516::1713377281::0::1::::<><>::uid://c4pk2e230h3he::::res://pngs and svgs/Key.png<>res://gdscripts/key.gd
-normal_door.tscn::PackedScene::1088587184150502390::1713377281::0::1::::<><>::uid://mqibywiyob8y::::res://pngs and svgs/Blank pixel.png<>res://gdscripts/normal_door.gd
-speed_changer.tscn::PackedScene::7441046978075436680::1713377281::0::1::::<><>::res://gdscripts/speed_changer.gd<>uid://cg4afyxjc26np::::res://pngs and svgs/speed_changer_placeholder.png
+walls.tscn::PackedScene::4279460650539100763::1713530735::0::1::::<><>::uid://dpy1cp3nek2j5::::res://pngs and svgs/Walls.png
 ::res://sfx/::1709519044
 checkSoundTrim.mp3::AudioStreamMP3::1061956853571953909::1709416462::1709519044::1::::<><>::
 coinSoundTrim.mp3::AudioStreamMP3::4257695395788794239::1709416462::1709519044::1::::<><>::

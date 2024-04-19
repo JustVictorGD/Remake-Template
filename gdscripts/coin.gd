@@ -31,15 +31,16 @@ func dont_activate(): # _ready():
 
 
 func player_respawn():
-	if AreaManager.save_data["level_1"][area.name]["coins"][coin_id] == 1:
+	
+	if AreaManager.save_data[AreaManager.current_level][AreaManager.current_area]["coins"][coin_id] == 1:
 		drop()
 
 func drop():
 	var tween = create_tween()
 	tween.tween_property($Sprite2D,"modulate:a", 1, 0.10)
 	
-	AreaManager.save_data["level_1"][area.name]["coins"][coin_id] = 0
-	AreaManager.coin_update()
+	
+	AreaManager.coin_dropped(coin_id)
 	
 	$CollisionShape2D.disabled = false
 
@@ -49,15 +50,22 @@ func touched_by_player():
 	
 	SFX.play("Coin")
 	
-	AreaManager.save_data["level_1"][area.name]["coins"][coin_id] = 1
-	AreaManager.coin_update()
+	AreaManager.save_data[AreaManager.current_level][AreaManager.current_area]["coins"][coin_id] = 1
+	
+	AreaManager.coin_collected(coin_id)
 	GlobalSignal.update_checkpoint.emit()
 	
 	$CollisionShape2D.set_deferred("disabled", true)
 
 func checkpoint_touched():
-	if AreaManager.save_data["level_1"][area.name]["coins"][coin_id] == 1:
-		AreaManager.save_data["level_1"][area.name]["coins"][coin_id] = 2
+#	var counter = 0
+#	for area1 in AreaManager.save_data[AreaManager.current_level]:
+#		for coin in AreaManager.save_data[AreaManager.current_level][area1]["coins"]:
+#			counter += 1
+#			if coin == 1:
+#				coin = 2
+#	print(counter)
+	pass
 
 func stay_collected():
 	$Sprite2D.modulate.a = 0.0

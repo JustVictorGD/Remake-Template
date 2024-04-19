@@ -2,20 +2,20 @@
 
 [ext_resource type="Script" path="res://gdscripts/area_script.gd" id="1_xiquv"]
 [ext_resource type="PackedScene" uid="uid://h8vx7l2yvik3" path="res://scenes/texture_rect.tscn" id="2_bkqph"]
-[ext_resource type="PackedScene" uid="uid://cq8nldi1xgl2m" path="res://scenes/objects/checkpoint.tscn" id="3_4l8nu"]
-[ext_resource type="PackedScene" uid="uid://x84mjtv2w2ia" path="res://scenes/objects/finish.tscn" id="4_dynbi"]
-[ext_resource type="PackedScene" uid="uid://deaq7r2mcfprc" path="res://scenes/objects/speed_changer.tscn" id="5_h21ak"]
-[ext_resource type="PackedScene" uid="uid://c1pak286uk8in" path="res://scenes/objects/coin.tscn" id="6_d8bub"]
-[ext_resource type="PackedScene" uid="uid://dbgh5lttxhbsm" path="res://scenes/objects/key.tscn" id="7_oxnp7"]
-[ext_resource type="PackedScene" uid="uid://cxhehbgjg65bh" path="res://scenes/objects/blue_enemy.tscn" id="8_b3g33"]
+[ext_resource type="PackedScene" uid="uid://cq8nldi1xgl2m" path="res://objects/checkpoint.tscn" id="3_4l8nu"]
+[ext_resource type="PackedScene" uid="uid://x84mjtv2w2ia" path="res://objects/finish.tscn" id="4_dynbi"]
+[ext_resource type="PackedScene" uid="uid://deaq7r2mcfprc" path="res://objects/speed_changer.tscn" id="5_h21ak"]
+[ext_resource type="PackedScene" uid="uid://c1pak286uk8in" path="res://objects/coin.tscn" id="6_d8bub"]
+[ext_resource type="PackedScene" uid="uid://dbgh5lttxhbsm" path="res://objects/key.tscn" id="7_oxnp7"]
+[ext_resource type="PackedScene" uid="uid://cxhehbgjg65bh" path="res://objects/blue_enemy.tscn" id="8_b3g33"]
 [ext_resource type="Script" path="res://gdscripts/Scene 1 groups/Group 1.gd" id="9_65a73"]
 [ext_resource type="Script" path="res://gdscripts/Scene 1 groups/Group 2.gd" id="10_evqbu"]
 [ext_resource type="Script" path="res://gdscripts/Scene 1 groups/Group3.gd" id="11_y0mdg"]
 [ext_resource type="Script" path="res://gdscripts/Scene 1 groups/Group4.gd" id="12_4kroh"]
 [ext_resource type="Script" path="res://gdscripts/Scene 1 groups/Group5.gd" id="13_0voxx"]
 [ext_resource type="Script" path="res://gdscripts/Scene 1 groups/Group6.gd" id="14_aia4x"]
-[ext_resource type="PackedScene" uid="uid://prk4v5kp504y" path="res://scenes/objects/normal_door.tscn" id="15_hb2x4"]
-[ext_resource type="PackedScene" uid="uid://bf3aa0chl0e7i" path="res://scenes/objects/golden_door.tscn" id="16_6vmbc"]
+[ext_resource type="PackedScene" uid="uid://prk4v5kp504y" path="res://objects/normal_door.tscn" id="15_hb2x4"]
+[ext_resource type="PackedScene" uid="uid://bf3aa0chl0e7i" path="res://objects/golden_door.tscn" id="16_6vmbc"]
 [ext_resource type="PackedScene" uid="uid://b18add8j0n6h0" path="res://scenes/walls.tscn" id="17_s1i30"]
 
 [node name="StartingRoom" type="Node2D"]
@@ -297,20 +297,20 @@ metadata/_edit_lock_ = true
 metadata/_edit_lock_ = true
 
 [node name="NormalDoor5" parent="Doors/NormalDoors" instance=ExtResource("15_hb2x4")]
-position = Vector2(800, 350)
+position = Vector2(-325, 375)
 door_id = 0
 horizontal_size = 2
 vertical_size = 6
 
 [node name="NormalDoor6" parent="Doors/NormalDoors" instance=ExtResource("15_hb2x4")]
-position = Vector2(800, 650)
+position = Vector2(-325, 575)
 door_id = 0
 direction = 2
 horizontal_size = 2
 vertical_size = 6
 
 [node name="NormalDoor3" parent="Doors/NormalDoors" instance=ExtResource("15_hb2x4")]
-position = Vector2(575, 500)
+position = Vector2(-525, 475)
 door_id = 0
 direction = 2
 horizontal_size = 3
@@ -330,20 +330,20 @@ horizontal_size = 2
 vertical_size = 4
 
 [node name="NormalDoor7" parent="Doors/NormalDoors" instance=ExtResource("15_hb2x4")]
-position = Vector2(700, 500)
+position = Vector2(-425, 475)
 door_id = 0
 horizontal_size = 2
 vertical_size = 8
 
 [node name="NormalDoor4" parent="Doors/NormalDoors" instance=ExtResource("15_hb2x4")]
-position = Vector2(900, 500)
+position = Vector2(-225, 475)
 door_id = 0
 direction = 2
 horizontal_size = 2
 vertical_size = 8
 
 [node name="NormalDoor8" parent="Doors/NormalDoors" instance=ExtResource("15_hb2x4")]
-position = Vector2(1025, 500)
+position = Vector2(-125, 475)
 door_id = 0
 horizontal_size = 3
 vertical_size = 8

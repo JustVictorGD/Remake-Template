@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://rp6twemqgdm"]
+[gd_scene load_steps=6 format=3 uid="uid://rp6twemqgdm"]
 
 [ext_resource type="Script" path="res://gdscripts/area_script.gd" id="1_moom0"]
 [ext_resource type="PackedScene" uid="uid://h8vx7l2yvik3" path="res://scenes/texture_rect.tscn" id="2_aph0i"]
 [ext_resource type="PackedScene" uid="uid://b18add8j0n6h0" path="res://scenes/walls.tscn" id="3_e6aef"]
-[ext_resource type="PackedScene" uid="uid://c1pak286uk8in" path="res://scenes/objects/coin.tscn" id="4_7g1xm"]
+[ext_resource type="PackedScene" uid="uid://c1pak286uk8in" path="res://objects/coin.tscn" id="4_7g1xm"]
+[ext_resource type="PackedScene" uid="uid://cxhehbgjg65bh" path="res://objects/blue_enemy.tscn" id="5_i4hm3"]
 
 [node name="1-A2" type="Node2D"]
 script = ExtResource("1_moom0")
@@ -27,3 +28,17 @@ position = Vector2(1325, 525)
 
 [node name="Coin4" parent="Coins" instance=ExtResource("4_7g1xm")]
 position = Vector2(1375, 525)
+
+[node name="StaticEnemies" type="Node2D" parent="."]
+
+[node name="BlueEnemy" parent="StaticEnemies" instance=ExtResource("5_i4hm3")]
+position = Vector2(1225, 625)
+
+[node name="BlueEnemy2" parent="StaticEnemies" instance=ExtResource("5_i4hm3")]
+position = Vector2(1275, 625)
+
+[node name="BlueEnemy3" parent="StaticEnemies" instance=ExtResource("5_i4hm3")]
+position = Vector2(1325, 625)
+
+[node name="BlueEnemy4" parent="StaticEnemies" instance=ExtResource("5_i4hm3")]
+position = Vector2(1375, 625)

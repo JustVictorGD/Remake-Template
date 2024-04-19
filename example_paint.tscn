@@ -1,14 +1,14 @@
 [gd_scene load_steps=5 format=3 uid="uid://50eax7itxum5"]
 
-[ext_resource type="Script" path="res://gdscripts/paint.gd" id="1_1yo5o"]
-[ext_resource type="Texture2D" uid="uid://dpikvplfchmdx" path="res://pngs and svgs/Paint Outline.png" id="1_hhyfi"]
-[ext_resource type="Texture2D" uid="uid://tl52ojsgpygw" path="res://pngs and svgs/Paint Filling.png" id="2_0jyx2"]
+[ext_resource type="Script" path="res://gdscripts/paint.gd" id="1_lshvd"]
+[ext_resource type="Texture2D" uid="uid://dpikvplfchmdx" path="res://pngs and svgs/Paint Outline.png" id="2_y5rn4"]
+[ext_resource type="Texture2D" uid="uid://tl52ojsgpygw" path="res://pngs and svgs/Paint Filling.png" id="3_buduo"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_x3rkk"]
 radius = 41.0122
 
 [node name="ExamplePaint" type="Area2D"]
-script = ExtResource("1_1yo5o")
+script = ExtResource("1_lshvd")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_x3rkk")
@@ -16,9 +16,9 @@ shape = SubResource("CircleShape2D_x3rkk")
 [node name="Outline" type="Sprite2D" parent="."]
 modulate = Color(0, 0.105882, 0.4, 1)
 scale = Vector2(0.5, 0.5)
-texture = ExtResource("1_hhyfi")
+texture = ExtResource("2_y5rn4")
 
 [node name="Filling" type="Sprite2D" parent="."]
 modulate = Color(0, 0.25098, 1, 1)
 scale = Vector2(0.5, 0.5)
-texture = ExtResource("2_0jyx2")
+texture = ExtResource("3_buduo")

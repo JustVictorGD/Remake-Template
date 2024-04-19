@@ -1,55 +1,89 @@
 extends Node2D
 
 
+# Variables for movement between areas
 var player_scene = load("res://scenes/player.tscn").instantiate()
-
 var area_size := Vector2(32, 20)
 var player_position := Vector2(250, 850)
-
-var current_area_x := 2
-var current_area_y := 2
-
-var current_level := ""
 var current_coordinates := Vector2i.ZERO
 
-var message := "MULTI-AREA ERROR: The scene that you're trying to enter either doesn't exist, \
-or doesn't have a correct name. (coming from area_manager.gd)"
+# Useful data
+var current_level := ""
+var current_area := ""
 
-
-
-var next_coin_id := 0
-
+# Coins
+var coins_collected := 0
 var coin_requirement := 0
 var requirement_met = false
 
+var next_coin_id := 0
 
-func coin_update():
+var uncollected_coins = []
+
+
+
+# What I want the game to do:
+# 1 - Update coins, and the array
+# 2 - Check if the requirement has been lost
+
+func player_respawn():
 	
-	var temporary_array := []
-	
-	
-	for area in save_data["level_1"]:
-		for coin in save_data["level_1"][area]["coins"]:
-			if coin == 0:
-				temporary_array.append(0)
-	
-	print(temporary_array)
-	
-	if temporary_array.size() == 0 and requirement_met == false:
-		requirement_met = true
-		print("VICTORY!")
-		GlobalSignal.coin_requirement_met.emit()
+	for area in save_data[current_level]:
 		
-	elif temporary_array.size() >= 1 and requirement_met:
-		print("What a shame")
+		for coin in save_data[current_level][area]["coins"]:
+			if coin == 0:
+				uncollected_coins.append(0)
+	
+	# Coin requirement lost?
+	print(uncollected_coins)
+	
+	for area in save_data[current_level]:
+		for i in range(save_data[current_level][area]["coins"].size()):
+			if save_data[current_level][area]["coins"][i] == 1:
+				coins_collected -= 1
+				if area != current_area:
+					save_data[current_level][area]["coins"][i] = 0
+	
+	test_for_loss.call_deferred()
+
+func test_for_loss():
+	if uncollected_coins.size() >= 1 and requirement_met:
+		
 		requirement_met = false
 		GlobalSignal.coin_requirement_lost.emit()
+	
+	uncollected_coins.clear()
 
 
-func _physics_process(delta):
-	#print("save_data = " + str(save_data))
-	#print()
-	pass
+
+func coin_collected(coin_id):
+	save_data[current_level][current_area]["coins"][coin_id] = 1
+	
+	coins_collected += 1
+	
+	var temporary_array = []
+	
+	for area in save_data[current_level]:
+		if 0 in save_data[current_level][area]["coins"]:
+			temporary_array.append(0)
+	
+	if temporary_array.size() == 0 and not requirement_met:
+		requirement_met = true
+		GlobalSignal.coin_requirement_met.emit()
+
+
+func coin_dropped(coin_id):
+	AreaManager.save_data[current_level][current_area]["coins"][coin_id] = 0
+
+
+func checkpoint_touched():
+	for area in save_data[current_level]:
+		for i in range(save_data[current_level][area]["coins"].size()):
+			if save_data[current_level][area]["coins"][i] == 1:
+				save_data[current_level][area]["coins"][i] = 2
+
+
+
 
 
 
@@ -93,7 +127,7 @@ func decimal_to_letter(decimal):
 
 
 func area_up():
-	for area in coordinates_data[current_level.trim_prefix("res://levels/")]:
+	for area in coordinates_data[current_level]:
 		if coordinates_data[current_level][area]["coordinates"] == current_coordinates + Vector2i.UP:
 			get_tree().change_scene_to_file(coordinates_data[current_level][area]["file_path"])
 
@@ -111,11 +145,6 @@ func area_right():
 	for area in coordinates_data[current_level.trim_prefix("res://levels/")]:
 		if coordinates_data[current_level][area]["coordinates"] == current_coordinates + Vector2i.RIGHT:
 			get_tree().change_scene_to_file(coordinates_data[current_level][area]["file_path"])
-
-
-func coin_collected(coin_id):
-	pass
-
 
 
 
@@ -137,9 +166,9 @@ func _ready():
 		file_info = level_1_dir.get_next()
 	
 	
-	GlobalSignal.player_respawn.connect(coin_update)
+	GlobalSignal.player_respawn.connect(player_respawn)
 	GlobalSignal.coin_collected.connect(coin_collected)
-	
+	GlobalSignal.checkpoint_touched.connect(checkpoint_touched)
 	
 	
 	# Accessing the main "levels" folder.
@@ -204,6 +233,7 @@ func _ready():
 					# Adding a "0" to the "coins" array for every coin found in the area.
 					for node in coins_folder.get_children():
 						save_data[str(level)][str(area).trim_suffix(".tscn")]["coins"].append(0)
+						coin_requirement += 1
 				
 				
 				# No "Coins" folder found?
@@ -224,6 +254,8 @@ valid \"Coins\" folder. Make sure you're using PascalCase for your nodes and fol
 	print()
 	print("Coordiantes Data: " + str(coordinates_data))
 	print()
+	print("Save data: " + str(save_data))
+	print()
 
 
 
@@ -233,6 +265,20 @@ func create_level_dictionaries():
 
 func create_area_dictionaries():
 	pass
+
+func _physics_process(delta):
+	#print_stuff()
+	pass
+
+func print_stuff():
+	#for area in save_data[current_level]:
+	#	print(str(area) + " = " + str(save_data[current_level][str(area)]["coins"]))
+	#print("Save data: " + str(save_data))
+	print("Coins collected: " + str(coins_collected) + "/" + str(coin_requirement))
+	#print()
+	#print(uncollected_coins)
+	pass
+
 
 
 
