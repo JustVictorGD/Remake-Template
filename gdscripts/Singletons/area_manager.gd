@@ -61,6 +61,9 @@ func decimal_to_letter(decimal):
 	if decimal == 0:
 		return "Z"
 	
+	elif decimal == -9223372036854775808: # When this number gets inverted, it exceeds 2^63-1 and would simply return "-"
+		return "-CRPXNLSKVLJFHH"
+	
 	else:
 		var minus_sign = ""
 		var letter_string = ""
