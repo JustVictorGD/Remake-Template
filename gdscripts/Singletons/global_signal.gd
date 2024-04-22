@@ -9,7 +9,7 @@ signal checkpoint_touched
 signal update_checkpoint
 
 # Collectibles
-signal coin_collected(coin_id)
+signal coin_collected()
 
 signal coin_requirement_met
 signal coin_requirement_lost

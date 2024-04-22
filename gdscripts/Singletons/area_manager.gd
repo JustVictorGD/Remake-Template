@@ -15,44 +15,23 @@ var current_area := ""
 var coins_collected := 0
 var coin_requirement := 0
 var requirement_met = false
-
 var next_coin_id := 0
 
-var uncollected_coins = []
+# Keys
+var next_key_id := 0
 
 
-
-# What I want the game to do:
-# 1 - Update coins, and the array
-# 2 - Check if the requirement has been lost
 
 func player_respawn():
-	
-	for area in save_data[current_level]:
-		
-		for coin in save_data[current_level][area]["coins"]:
-			if coin == 0:
-				uncollected_coins.append(0)
-	
-	# Coin requirement lost?
-	print(uncollected_coins)
-	
 	for area in save_data[current_level]:
 		for i in range(save_data[current_level][area]["coins"].size()):
 			if save_data[current_level][area]["coins"][i] == 1:
 				coins_collected -= 1
-				if area != current_area:
-					save_data[current_level][area]["coins"][i] = 0
+				save_data[current_level][area]["coins"][i] = 0
 	
-	test_for_loss.call_deferred()
-
-func test_for_loss():
-	if uncollected_coins.size() >= 1 and requirement_met:
-		
+	if coins_collected < coin_requirement:
 		requirement_met = false
 		GlobalSignal.coin_requirement_lost.emit()
-	
-	uncollected_coins.clear()
 
 
 
@@ -60,21 +39,9 @@ func coin_collected(coin_id):
 	save_data[current_level][current_area]["coins"][coin_id] = 1
 	
 	coins_collected += 1
-	
-	var temporary_array = []
-	
-	for area in save_data[current_level]:
-		if 0 in save_data[current_level][area]["coins"]:
-			temporary_array.append(0)
-	
-	if temporary_array.size() == 0 and not requirement_met:
-		requirement_met = true
-		GlobalSignal.coin_requirement_met.emit()
 
-
-func coin_dropped(coin_id):
-	AreaManager.save_data[current_level][current_area]["coins"][coin_id] = 0
-
+func key_collected(true_id):
+	save_data[current_level][current_area]["keys"][true_id].y = 1
 
 func checkpoint_touched():
 	for area in save_data[current_level]:
@@ -84,46 +51,29 @@ func checkpoint_touched():
 
 
 
-
-
-
 # Thanks Gemini for generating this for me
 var letters = ["Z", "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", \
 "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y"]
 
 
-# Please excuse this horrendous code
+
 func decimal_to_letter(decimal):
-	if decimal >= 0: # Positive / Negative check
-		if decimal > 17575: # 4th letter
-			return str(letters[decimal / 17576 % 26]) + str(letters[decimal / 676 % 26]) + \
-			str(letters[decimal / 26 % 26]) + str(letters[decimal % 26])
-		
-		elif decimal > 675: # 3rd letter
-			return str(letters[decimal / 676 % 26]) + \
-			str(letters[decimal / 26 % 26]) + str(letters[decimal % 26])
-		
-		elif decimal > 25: # 2nd letter
-			return str(letters[decimal / 26 % 26]) + str(letters[decimal % 26])
-		
-		elif decimal < 26: # 1st letter
-			return str(letters[decimal % 26])
+	if decimal == 0:
+		return "Z"
 	
 	else:
-		decimal *= -1
-		if decimal > 17575: # 4th letter
-			return "-" + str(letters[decimal / 17576 % 26]) + str(letters[decimal / 676 % 26]) + \
-			str(letters[decimal / 26 % 26]) + str(letters[decimal % 26])
+		var minus_sign = ""
+		var letter_string = ""
 		
-		elif decimal > 675: # 3rd letter
-			return "-" + str(letters[decimal / 676 % 26]) + \
-			str(letters[decimal / 26 % 26]) + str(letters[decimal % 26])
+		if decimal < 0:
+			minus_sign = "-"
+			decimal *= -1
 		
-		elif decimal > 25: # 2nd letter
-			return "-" + str(letters[decimal / 26 % 26]) + str(letters[decimal % 26])
+		while decimal > 0:
+			letter_string = letters[decimal % 26] + letter_string
+			decimal /= 26
 		
-		elif decimal < 26: # 1st letter
-			return "-" + str(letters[decimal % 26])
+		return minus_sign + letter_string
 
 
 func area_up():
@@ -151,33 +101,28 @@ func area_right():
 var save_data = {}
 var coordinates_data = {}
 
+
+
 func _ready():
-	# This thing returns 4 lines, starting with "1-A1 coordinates = (1, 1)".
-	
-	var level_1_dir = DirAccess.open("res://levels/level_1/")
-	level_1_dir.list_dir_begin()
-	var file_info = level_1_dir.get_next()
-	
-	while file_info.is_empty() == false:
-		
-		var new_area = load("res://levels/level_1/" + str(file_info)).instantiate()
-		print(str(new_area.name) + " coordinates = " + str(new_area.coordinates))
-		
-		file_info = level_1_dir.get_next()
-	
 	
 	GlobalSignal.player_respawn.connect(player_respawn)
-	GlobalSignal.coin_collected.connect(coin_collected)
 	GlobalSignal.checkpoint_touched.connect(checkpoint_touched)
 	
+	create_level_dictionaries()
 	
-	# Accessing the main "levels" folder.
+	print()
+	print("Save data: " + str(save_data))
+	print()
+
+
+
+func create_level_dictionaries():
+	
 	var master_dir = DirAccess.open("res://levels")
 	master_dir.list_dir_begin()
 	var main_folder = master_dir.get_next()
 	
 	
-	# Iterating through the folder, and adding dictionaries named based on the level folders to save_data.
 	while main_folder.is_empty() == false:
 		if main_folder != "ignored_files":
 			
@@ -186,85 +131,66 @@ func _ready():
 		main_folder = master_dir.get_next()
 	
 	
-	# This entire thing is repeated for every level folder found in the main "levels" folder.
 	for level in save_data:
 		
-		# Accessing the level folder(s).
-		var the_level_dir = DirAccess.open("res://levels/" + str(level))
-		the_level_dir.list_dir_begin()
-		var area = the_level_dir.get_next()
-		
-		
-		# Iterating through the folder(s), again.
-		while area.is_empty() == false:
-			
-			
-			var area_name: String = str(area).trim_suffix(".tscn") # This is a shortened version of the scene's file name.
-			
-			save_data[level][str(area).trim_suffix(".tscn")] = {} # Adding a dictionary named after the area, to the level dictionary.
-			
-			if load("res://levels/" + str(level) + "/" + str(area)) != null:
-				
-				var new_area = load("res://levels/" + str(level) + "/" + str(area)).instantiate()
-				
-				print(str(level) + " and " + str(area))
-				
-				coordinates_data[str(level)][str(area).trim_suffix(".tscn")] = {"coordinates" = new_area.coordinates, \
-"file_path" = "res://levels/" + str(level) + "/" + str(area)}
-				
-				
-				
-				
-				
-			# Adding empty coin and key arrays to each area found.
-			save_data[level][area_name]["coins"] = []
-			save_data[level][area_name]["keys"] = []
-			
-			
-			# Loading the area, to access its contents.
-			if load("res://levels/" + str(level) + "/" + str(area)) != null:
-				var loaded_area = load("res://levels/" + str(level) + "/" + str(area)).instantiate()
-				
-				# Checking for a "Coins" folder inside the actual area.
-				if loaded_area.get_node("Coins") != null:
-					var coins_folder = loaded_area.get_node("Coins")
-					
-					
-					# Adding a "0" to the "coins" array for every coin found in the area.
-					for node in coins_folder.get_children():
-						save_data[str(level)][str(area).trim_suffix(".tscn")]["coins"].append(0)
-						coin_requirement += 1
-				
-				
-				# No "Coins" folder found?
-				
-				else:
-					print("The area " + str(level) + ", " + str(area).trim_suffix(".tscn") + ", doesn't seem to have a \
-valid \"Coins\" folder. Make sure you're using PascalCase for your nodes and folders, this is how the Remake Template works by default.")
-			
-			# The area (levels -> level_name -> area_name) doesn't exist?
-			
-			else:
-				print("FAIL. " + str(area))
-			
-			# Continuing the folder iteration. Fun fact: Not including this will result in a while loop.
-			
-			area = the_level_dir.get_next()
+		create_area_dictionaries(level)
+
+
+
+func create_area_dictionaries(level):
 	
-	print()
-	print("Coordiantes Data: " + str(coordinates_data))
-	print()
-	print("Save data: " + str(save_data))
-	print()
+	var the_level_dir = DirAccess.open("res://levels/" + str(level))
+	the_level_dir.list_dir_begin()
+	var area = the_level_dir.get_next()
+	
+	
+	while area.is_empty() == false:
+		
+		var area_name: String = str(area).trim_suffix(".tscn")
+		
+		save_data[level][area_name] = {}
+		
+		
+		if load("res://levels/" + str(level) + "/" + str(area)) != null:
+			
+			var new_area = load("res://levels/" + str(level) + "/" + str(area)).instantiate()
+			
+			coordinates_data[level][area_name] = {"coordinates" = new_area.coordinates,
+				"file_path" = "res://levels/" + str(level) + "/" + str(area)}
+			
+			create_save_arrays(level, area)
+		
+		
+		area = the_level_dir.get_next()
 
 
 
-func create_level_dictionaries():
-	pass
+func create_save_arrays(level, area):
+	
+	var loaded_area = load("res://levels/" + str(level) + "/" + str(area)).instantiate()
+	
+	save_data[level][area.trim_suffix(".tscn")]["coins"] = []
+	save_data[level][area.trim_suffix(".tscn")]["keys"] = []
+	
+	
+	if loaded_area.has_node("Collectables/Coins"):
+		
+		var coins_folder = loaded_area.get_node("Collectables/Coins")
+		for node in coins_folder.get_children():
+			
+			save_data[str(level)][str(area).trim_suffix(".tscn")]["coins"].append(0)
+			coin_requirement += 1
+	
+	
+	if loaded_area.has_node("Collectables/Keys"):
+		
+		var keys_folder = loaded_area.get_node("Collectables/Keys")
+		for key in keys_folder.get_children():
+			
+			print("name = " + str(key.name) + ", key_id = " + str(key.key_id))
+			save_data[str(level)][str(area).trim_suffix(".tscn")]["keys"].append(Vector2i(key.key_id, 0))
 
 
-func create_area_dictionaries():
-	pass
 
 func _physics_process(delta):
 	#print_stuff()
