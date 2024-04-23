@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="TWHG Remake Template"
-run/main_scene="res://levels/level_1/StartingRoom.tscn"
+run/main_scene="res://levels/level_1/TheMiddle.tscn"
 config/features=PackedStringArray("4.2", "GL Compatibility")
 boot_splash/bg_color=Color(0.2, 0.282353, 0.482353, 1)
 config/icon="res://pngs and svgs/icon.svg"

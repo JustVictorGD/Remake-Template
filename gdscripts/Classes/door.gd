@@ -1,8 +1,7 @@
 extends StaticBody2D
 class_name Door
 
-@export_category("Door Size")
-@export var direction = 0
+@export var direction: DoorDirection = DoorDirection.UP
 @export var horizontal_size = 1
 @export var vertical_size = 1
 
@@ -10,6 +9,12 @@ class_name Door
 @onready var filling = get_node("Filling")
 @onready var collision_shape = get_node("CollisionShape2D")
 
+enum DoorDirection {
+	UP,
+	LEFT,
+	DOWN,
+	RIGHT,
+}
 
 var closing_speed = 0.5
 var opening_speed = 0.75

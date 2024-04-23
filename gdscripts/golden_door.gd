@@ -15,26 +15,16 @@ func _ready():
 	
 	if AreaManager.coins_collected >= self.coin_requirement:
 		stay_open()
-	
-	print(self.coin_requirement)
 
 
 
 func coin_collected():
 	
-	print(str(AreaManager.coins_collected) + "/" + str(self.coin_requirement))
-	
-	if AreaManager.coins_collected >= self.coin_requirement:
-		print("REQUIREMENT MET")
-		if not opened:
-			print("OPEN")
-			open()
+	if AreaManager.coins_collected >= self.coin_requirement and not opened:
+		open()
 
 
 
 func player_respawn():
-	if AreaManager.coins_collected < self.coin_requirement:
-		print("REQUIREMENT NOT MET")
-		if opened:
-			print("CLOSE")
-			close()
+	if AreaManager.coins_collected < self.coin_requirement and opened:
+		close()

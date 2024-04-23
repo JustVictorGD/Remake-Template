@@ -13,15 +13,19 @@ var death = false
 
 func _ready():
 	GlobalSignal.speed_changed.connect(speed_changed)
+	GlobalSignal.finish.connect(finish)
+	
+	if AreaManager.player_previously_dead:
+		var tween = create_tween()
+		tween.tween_property($CanvasGroup,"self_modulate:a", 0, 0)
+		tween.tween_property($CanvasGroup,"self_modulate:a", 1, 0.25)
+		
+		AreaManager.player_previously_dead = false
 
 
 func _on_area_2d_area_entered(area):
 	if "Enemies" in area.get_groups() and invincible == false:
 		enemy_death()
-	
-	if "Finish" in area.get_groups() and AreaManager.requirement_met:
-		if not GameState.finish_touched:
-			win()
 
 
 func enemy_death():
@@ -44,29 +48,34 @@ func water_death():
 	pass
 
 
-func win():
+func finish():
 	var tween = create_tween()
 	tween.tween_property($CanvasGroup,"self_modulate:a", 0, 1)
 	
 	invincible = true
 	GameState.finish_touched = true
-
-
-
+	
+	SFX.play("Finish")
 
 
 
 func _on_respawn_timer_timeout():
-	position = GameState.respawn_pos
-	
-	death = false
-	
-	var tween = create_tween()
-	tween.tween_property($CanvasGroup,"self_modulate:a", 1, 0.25)
 	
 	GlobalSignal.player_respawn.emit()
 	
-	$Extra50ms.start()
+	if AreaManager.current_area_path == AreaManager.respawn_area:
+		position = AreaManager.respawn_pos
+		
+		death = false
+		
+		var tween = create_tween()
+		tween.tween_property($CanvasGroup,"self_modulate:a", 1, 0.25)
+		$Extra50ms.start()
+	
+	else:
+		AreaManager.player_position = AreaManager.respawn_pos
+		AreaManager.player_previously_dead = true
+		get_tree().change_scene_to_file(AreaManager.respawn_area)
 
 func _on_extra_100_ms_timeout():
 	invincible = false

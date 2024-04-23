@@ -29,6 +29,11 @@ stream = ExtResource("6_kcie3")
 [node name="OpenDoor" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("7_6ptxg")
 
+[node name="DistantDoor" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("7_6ptxg")
+volume_db = -20.0
+bus = &"Reverb"
+
 [node name="CloseDoor" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("7_6ptxg")
 volume_db = -6.0

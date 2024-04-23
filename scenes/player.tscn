@@ -6,8 +6,9 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hgmi6"]
 size = Vector2(44, 44)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_6o1rl"]
-size = Vector2(44, 44)
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_q1tsk"]
+radius = 14.0
+height = 44.0
 
 [node name="redCube" type="CharacterBody2D"]
 collision_mask = 17
@@ -21,8 +22,37 @@ collision_mask = 31
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
 shape = SubResource("RectangleShape2D_hgmi6")
 
-[node name="WallCollision" type="CollisionShape2D" parent="."]
-shape = SubResource("RectangleShape2D_6o1rl")
+[node name="CanvasGroup" type="CanvasGroup" parent="."]
+clip_children = 1
+
+[node name="Outline" type="Sprite2D" parent="CanvasGroup"]
+modulate = Color(0.4, 0, 0, 1)
+position = Vector2(-1.90735e-06, -1.90735e-06)
+scale = Vector2(44, 44)
+texture = ExtResource("2_xn2t2")
+
+[node name="Filling" type="Sprite2D" parent="CanvasGroup"]
+modulate = Color(1, 0, 0, 1)
+scale = Vector2(32, 32)
+texture = ExtResource("2_xn2t2")
+
+[node name="WallCollision1" type="CollisionShape2D" parent="."]
+position = Vector2(-8, 0)
+shape = SubResource("CapsuleShape2D_q1tsk")
+
+[node name="WallCollision2" type="CollisionShape2D" parent="."]
+position = Vector2(8, 0)
+shape = SubResource("CapsuleShape2D_q1tsk")
+
+[node name="WallCollision3" type="CollisionShape2D" parent="."]
+position = Vector2(0, -8)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_q1tsk")
+
+[node name="WallCollision4" type="CollisionShape2D" parent="."]
+position = Vector2(0, 8)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_q1tsk")
 
 [node name="RespawnTimer" type="Timer" parent="."]
 wait_time = 0.5
@@ -39,20 +69,6 @@ limit_top = 0
 limit_right = 1600
 limit_bottom = 1000
 position_smoothing_enabled = true
-
-[node name="CanvasGroup" type="CanvasGroup" parent="."]
-clip_children = 1
-
-[node name="Outline" type="Sprite2D" parent="CanvasGroup"]
-modulate = Color(0.4, 0, 0, 1)
-position = Vector2(-1.90735e-06, -1.90735e-06)
-scale = Vector2(44, 44)
-texture = ExtResource("2_xn2t2")
-
-[node name="Filling" type="Sprite2D" parent="CanvasGroup"]
-modulate = Color(1, 0, 0, 1)
-scale = Vector2(32, 32)
-texture = ExtResource("2_xn2t2")
 
 [connection signal="area_entered" from="Player" to="." method="_on_area_2d_area_entered"]
 [connection signal="area_entered" from="Player" to="." method="_on_player_area_entered"]

@@ -7,9 +7,21 @@ var area_size := Vector2(32, 20)
 var player_position := Vector2(250, 850)
 var current_coordinates := Vector2i.ZERO
 
-# Useful data
+# Checkpoints
+var respawn_pos := Vector2(250, 850)
+var respawn_area := ""
+var next_checkpoint_id := 0
+
+var current_checkpoint_id: int = 0
+var current_checkpoint_area: String = "res://levels/level_1/StartingRoom.tscn"
+var current_checkpoint_can_update: bool = false
+
+
+# Useful data for multi-area
 var current_level := ""
 var current_area := ""
+var current_area_path := ""
+var player_previously_dead := false
 
 # Coins
 var coins_collected := 0
@@ -19,35 +31,56 @@ var next_coin_id := 0
 
 # Keys
 var next_key_id := 0
+var used_key_ids := []
 
 
 
 func player_respawn():
+	
+	current_checkpoint_can_update = false
+	
 	for area in save_data[current_level]:
+		
 		for i in range(save_data[current_level][area]["coins"].size()):
 			if save_data[current_level][area]["coins"][i] == 1:
 				coins_collected -= 1
 				save_data[current_level][area]["coins"][i] = 0
+		
+		if area != current_area:
+		
+			for i in range(save_data[current_level][area]["keys"].size()):
+				if save_data[current_level][area]["keys"][i].y != 2:
+					save_data[current_level][area]["keys"][i].y = 0
 	
 	if coins_collected < coin_requirement:
 		requirement_met = false
 		GlobalSignal.coin_requirement_lost.emit()
 
-
+func update_checkpoint():
+	current_checkpoint_can_update = true
 
 func coin_collected(coin_id):
 	save_data[current_level][current_area]["coins"][coin_id] = 1
-	
 	coins_collected += 1
+	
+	if coins_collected >= coin_requirement:
+		requirement_met = true
+
 
 func key_collected(true_id):
 	save_data[current_level][current_area]["keys"][true_id].y = 1
 
+
 func checkpoint_touched():
 	for area in save_data[current_level]:
+		
 		for i in range(save_data[current_level][area]["coins"].size()):
 			if save_data[current_level][area]["coins"][i] == 1:
 				save_data[current_level][area]["coins"][i] = 2
+		
+		for i in range(save_data[current_level][area]["keys"].size()):
+				if save_data[current_level][area]["keys"][i].y == 1:
+					save_data[current_level][area]["keys"][i].y = 2
 
 
 
@@ -110,11 +143,12 @@ func _ready():
 	
 	GlobalSignal.player_respawn.connect(player_respawn)
 	GlobalSignal.checkpoint_touched.connect(checkpoint_touched)
+	GlobalSignal.update_checkpoint.connect(update_checkpoint)
 	
 	create_level_dictionaries()
 	
 	print()
-	print("Save data: " + str(save_data))
+	print(used_key_ids)
 	print()
 
 
@@ -190,8 +224,13 @@ func create_save_arrays(level, area):
 		var keys_folder = loaded_area.get_node("Collectables/Keys")
 		for key in keys_folder.get_children():
 			
-			print("name = " + str(key.name) + ", key_id = " + str(key.key_id))
 			save_data[str(level)][str(area).trim_suffix(".tscn")]["keys"].append(Vector2i(key.key_id, 0))
+	
+	if loaded_area.has_node("Doors/NormalDoors"):
+		var doors_folder = loaded_area.get_node("Doors/NormalDoors")
+		for door in doors_folder.get_children():
+			
+			used_key_ids.append(door.door_id)
 
 
 
@@ -200,12 +239,8 @@ func _physics_process(delta):
 	pass
 
 func print_stuff():
-	#for area in save_data[current_level]:
-	#	print(str(area) + " = " + str(save_data[current_level][str(area)]["coins"]))
-	#print("Save data: " + str(save_data))
-	print("Coins collected: " + str(coins_collected) + "/" + str(coin_requirement))
-	#print()
-	#print(uncollected_coins)
+	print("Save data: " + str(save_data))
+	print()
 	pass
 
 

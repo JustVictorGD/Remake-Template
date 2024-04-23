@@ -1,0 +1,463 @@
+[gd_scene load_steps=22 format=3 uid="uid://bt1d4nhdfcxie"]
+
+[ext_resource type="Script" path="res://gdscripts/area_script.gd" id="1_0h2x1"]
+[ext_resource type="PackedScene" uid="uid://h8vx7l2yvik3" path="res://scenes/texture_rect.tscn" id="2_yu3vk"]
+[ext_resource type="PackedScene" uid="uid://cq8nldi1xgl2m" path="res://objects/checkpoint.tscn" id="3_hpssu"]
+[ext_resource type="PackedScene" uid="uid://deaq7r2mcfprc" path="res://objects/speed_changer.tscn" id="4_mv0ch"]
+[ext_resource type="PackedScene" uid="uid://c1pak286uk8in" path="res://objects/coin.tscn" id="5_oef0g"]
+[ext_resource type="PackedScene" uid="uid://dbgh5lttxhbsm" path="res://objects/key.tscn" id="6_16ag2"]
+[ext_resource type="PackedScene" uid="uid://cxhehbgjg65bh" path="res://objects/blue_enemy.tscn" id="7_ko6q3"]
+[ext_resource type="Script" path="res://gdscripts/Scene 1 groups/Group5.gd" id="8_h805u"]
+[ext_resource type="Script" path="res://gdscripts/Scene 1 groups/Group6.gd" id="9_ik77j"]
+[ext_resource type="PackedScene" uid="uid://prk4v5kp504y" path="res://objects/normal_door.tscn" id="10_rxdut"]
+[ext_resource type="PackedScene" uid="uid://bf3aa0chl0e7i" path="res://objects/golden_door.tscn" id="11_j5g8c"]
+[ext_resource type="PackedScene" uid="uid://b18add8j0n6h0" path="res://scenes/walls.tscn" id="12_bguky"]
+
+[sub_resource type="Animation" id="Animation_lif6u"]
+resource_name = "New Animation"
+loop_mode = 2
+step = 0.0166667
+
+[sub_resource type="Animation" id="Animation_mqii4"]
+resource_name = "new_animation"
+loop_mode = 2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Group1:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = false
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, 370)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_jsieo"]
+_data = {
+"New Animation": SubResource("Animation_lif6u"),
+"new_animation": SubResource("Animation_mqii4")
+}
+
+[sub_resource type="Animation" id="Animation_cy15d"]
+resource_name = "new_animation"
+loop_mode = 2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, -370)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_6sq81"]
+_data = {
+"new_animation": SubResource("Animation_cy15d")
+}
+
+[sub_resource type="Animation" id="Animation_2dh52"]
+resource_name = "new_animation"
+loop_mode = 2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(-2, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(570, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_l24gt"]
+_data = {
+"new_animation": SubResource("Animation_2dh52")
+}
+
+[sub_resource type="Animation" id="Animation_lm86y"]
+resource_name = "new_animation"
+loop_mode = 2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(-2, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(-570, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_hg48y"]
+_data = {
+"new_animation": SubResource("Animation_lm86y")
+}
+
+[node name="TheMiddle" type="Node2D"]
+script = ExtResource("1_0h2x1")
+coordinates = Vector2i(2, 2)
+metadata/_edit_lock_ = true
+
+[node name="TextureRect" parent="." instance=ExtResource("2_yu3vk")]
+
+[node name="Checkpoints" type="Node2D" parent="."]
+metadata/_edit_lock_ = true
+
+[node name="Checkpoint" parent="Checkpoints" instance=ExtResource("3_hpssu")]
+position = Vector2(250, 850)
+scale = Vector2(2, 2)
+type = 1
+
+[node name="Checkpoint2" parent="Checkpoints" instance=ExtResource("3_hpssu")]
+position = Vector2(250, 300)
+
+[node name="Checkpoint3" parent="Checkpoints" instance=ExtResource("3_hpssu")]
+position = Vector2(800, 250)
+
+[node name="Checkpoint4" parent="Checkpoints" instance=ExtResource("3_hpssu")]
+position = Vector2(800, 750)
+
+[node name="Checkpoint5" parent="Checkpoints" instance=ExtResource("3_hpssu")]
+position = Vector2(1350, 700)
+
+[node name="Checkpoint6" parent="Checkpoints" instance=ExtResource("3_hpssu")]
+position = Vector2(1350, 150)
+scale = Vector2(2, 2)
+type = 2
+
+[node name="SpeedChangers" type="Node2D" parent="."]
+
+[node name="speed_changer" parent="SpeedChangers" instance=ExtResource("4_mv0ch")]
+position = Vector2(1075, 925)
+
+[node name="speed_changer2" parent="SpeedChangers" instance=ExtResource("4_mv0ch")]
+position = Vector2(1225, 925)
+speed = 8
+
+[node name="speed_changer3" parent="SpeedChangers" instance=ExtResource("4_mv0ch")]
+position = Vector2(1375, 925)
+speed = 1
+
+[node name="Collectables" type="Node2D" parent="."]
+
+[node name="Coins" type="Node2D" parent="Collectables"]
+metadata/_edit_lock_ = true
+
+[node name="Coin50" parent="Collectables/Coins" instance=ExtResource("5_oef0g")]
+position = Vector2(675, 475)
+
+[node name="Coin51" parent="Collectables/Coins" instance=ExtResource("5_oef0g")]
+position = Vector2(625, 475)
+
+[node name="Coin52" parent="Collectables/Coins" instance=ExtResource("5_oef0g")]
+position = Vector2(675, 525)
+
+[node name="Coin53" parent="Collectables/Coins" instance=ExtResource("5_oef0g")]
+position = Vector2(625, 525)
+
+[node name="Coin54" parent="Collectables/Coins" instance=ExtResource("5_oef0g")]
+position = Vector2(975, 475)
+
+[node name="Coin55" parent="Collectables/Coins" instance=ExtResource("5_oef0g")]
+position = Vector2(925, 475)
+
+[node name="Coin56" parent="Collectables/Coins" instance=ExtResource("5_oef0g")]
+position = Vector2(975, 525)
+
+[node name="Coin57" parent="Collectables/Coins" instance=ExtResource("5_oef0g")]
+position = Vector2(925, 525)
+
+[node name="Keys" type="Node2D" parent="Collectables"]
+metadata/_edit_lock_ = true
+
+[node name="Key" parent="Collectables/Keys" instance=ExtResource("6_16ag2")]
+position = Vector2(250, 700)
+key_id = 0
+
+[node name="Key2" parent="Collectables/Keys" instance=ExtResource("6_16ag2")]
+position = Vector2(1450, 500)
+key_id = 1
+
+[node name="StaticEnemies" type="Node2D" parent="."]
+metadata/_edit_lock_ = true
+
+[node name="BlueEnemy" parent="StaticEnemies" instance=ExtResource("7_ko6q3")]
+position = Vector2(250, 500)
+
+[node name="BlueEnemy2" parent="StaticEnemies" instance=ExtResource("7_ko6q3")]
+position = Vector2(1350, 500)
+
+[node name="MovingEnemies" type="Node2D" parent="."]
+metadata/_edit_lock_ = true
+
+[node name="Group1" type="Node2D" parent="MovingEnemies"]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="MovingEnemies/Group1"]
+root_node = NodePath("../..")
+libraries = {
+"": SubResource("AnimationLibrary_jsieo")
+}
+autoplay = "new_animation"
+
+[node name="BlueEnemy" parent="MovingEnemies/Group1" instance=ExtResource("7_ko6q3")]
+position = Vector2(525, 315)
+
+[node name="BlueEnemy2" parent="MovingEnemies/Group1" instance=ExtResource("7_ko6q3")]
+position = Vector2(575, 315)
+
+[node name="BlueEnemy3" parent="MovingEnemies/Group1" instance=ExtResource("7_ko6q3")]
+position = Vector2(725, 315)
+
+[node name="BlueEnemy4" parent="MovingEnemies/Group1" instance=ExtResource("7_ko6q3")]
+position = Vector2(775, 315)
+
+[node name="BlueEnemy5" parent="MovingEnemies/Group1" instance=ExtResource("7_ko6q3")]
+position = Vector2(925, 315)
+
+[node name="BlueEnemy6" parent="MovingEnemies/Group1" instance=ExtResource("7_ko6q3")]
+position = Vector2(975, 315)
+
+[node name="Group2" type="Node2D" parent="MovingEnemies"]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="MovingEnemies/Group2"]
+libraries = {
+"": SubResource("AnimationLibrary_6sq81")
+}
+autoplay = "new_animation"
+
+[node name="BlueEnemy" parent="MovingEnemies/Group2" instance=ExtResource("7_ko6q3")]
+position = Vector2(625, 685)
+
+[node name="BlueEnemy2" parent="MovingEnemies/Group2" instance=ExtResource("7_ko6q3")]
+position = Vector2(675, 685)
+
+[node name="BlueEnemy3" parent="MovingEnemies/Group2" instance=ExtResource("7_ko6q3")]
+position = Vector2(825, 685)
+
+[node name="BlueEnemy4" parent="MovingEnemies/Group2" instance=ExtResource("7_ko6q3")]
+position = Vector2(875, 685)
+
+[node name="BlueEnemy5" parent="MovingEnemies/Group2" instance=ExtResource("7_ko6q3")]
+position = Vector2(1025, 685)
+
+[node name="BlueEnemy6" parent="MovingEnemies/Group2" instance=ExtResource("7_ko6q3")]
+position = Vector2(1075, 685)
+
+[node name="Group3" type="Node2D" parent="MovingEnemies"]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="MovingEnemies/Group3"]
+libraries = {
+"": SubResource("AnimationLibrary_l24gt")
+}
+autoplay = "new_animation"
+speed_scale = 0.5
+
+[node name="BlueEnemy" parent="MovingEnemies/Group3" instance=ExtResource("7_ko6q3")]
+position = Vector2(515, 325)
+
+[node name="BlueEnemy2" parent="MovingEnemies/Group3" instance=ExtResource("7_ko6q3")]
+position = Vector2(515, 375)
+
+[node name="BlueEnemy3" parent="MovingEnemies/Group3" instance=ExtResource("7_ko6q3")]
+position = Vector2(515, 525)
+
+[node name="BlueEnemy4" parent="MovingEnemies/Group3" instance=ExtResource("7_ko6q3")]
+position = Vector2(515, 575)
+
+[node name="Group4" type="Node2D" parent="MovingEnemies"]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="MovingEnemies/Group4"]
+libraries = {
+"": SubResource("AnimationLibrary_hg48y")
+}
+autoplay = "new_animation"
+speed_scale = 0.5
+
+[node name="BlueEnemy" parent="MovingEnemies/Group4" instance=ExtResource("7_ko6q3")]
+position = Vector2(1085, 425)
+
+[node name="BlueEnemy2" parent="MovingEnemies/Group4" instance=ExtResource("7_ko6q3")]
+position = Vector2(1085, 475)
+
+[node name="BlueEnemy3" parent="MovingEnemies/Group4" instance=ExtResource("7_ko6q3")]
+position = Vector2(1085, 625)
+
+[node name="BlueEnemy4" parent="MovingEnemies/Group4" instance=ExtResource("7_ko6q3")]
+position = Vector2(1085, 675)
+
+[node name="Group5" type="Node2D" parent="MovingEnemies"]
+position = Vector2(250, 500)
+script = ExtResource("8_h805u")
+
+[node name="BlueEnemy" parent="MovingEnemies/Group5" instance=ExtResource("7_ko6q3")]
+position = Vector2(-100, -100)
+
+[node name="BlueEnemy2" parent="MovingEnemies/Group5" instance=ExtResource("7_ko6q3")]
+position = Vector2(-75, -75)
+
+[node name="BlueEnemy3" parent="MovingEnemies/Group5" instance=ExtResource("7_ko6q3")]
+position = Vector2(-50, -50)
+
+[node name="BlueEnemy4" parent="MovingEnemies/Group5" instance=ExtResource("7_ko6q3")]
+position = Vector2(-25, -25)
+
+[node name="BlueEnemy5" parent="MovingEnemies/Group5" instance=ExtResource("7_ko6q3")]
+position = Vector2(25, -25)
+
+[node name="BlueEnemy6" parent="MovingEnemies/Group5" instance=ExtResource("7_ko6q3")]
+position = Vector2(50, -50)
+
+[node name="BlueEnemy7" parent="MovingEnemies/Group5" instance=ExtResource("7_ko6q3")]
+position = Vector2(75, -75)
+
+[node name="BlueEnemy8" parent="MovingEnemies/Group5" instance=ExtResource("7_ko6q3")]
+position = Vector2(100, -100)
+
+[node name="BlueEnemy9" parent="MovingEnemies/Group5" instance=ExtResource("7_ko6q3")]
+position = Vector2(-25, 25)
+
+[node name="BlueEnemy10" parent="MovingEnemies/Group5" instance=ExtResource("7_ko6q3")]
+position = Vector2(-50, 50)
+
+[node name="BlueEnemy11" parent="MovingEnemies/Group5" instance=ExtResource("7_ko6q3")]
+position = Vector2(-75, 75)
+
+[node name="BlueEnemy12" parent="MovingEnemies/Group5" instance=ExtResource("7_ko6q3")]
+position = Vector2(-100, 100)
+
+[node name="BlueEnemy13" parent="MovingEnemies/Group5" instance=ExtResource("7_ko6q3")]
+position = Vector2(25, 25)
+
+[node name="BlueEnemy14" parent="MovingEnemies/Group5" instance=ExtResource("7_ko6q3")]
+position = Vector2(50, 50)
+
+[node name="BlueEnemy15" parent="MovingEnemies/Group5" instance=ExtResource("7_ko6q3")]
+position = Vector2(75, 75)
+
+[node name="BlueEnemy16" parent="MovingEnemies/Group5" instance=ExtResource("7_ko6q3")]
+position = Vector2(100, 100)
+
+[node name="Group6" type="Node2D" parent="MovingEnemies"]
+position = Vector2(1350, 500)
+script = ExtResource("9_ik77j")
+
+[node name="BlueEnemy" parent="MovingEnemies/Group6" instance=ExtResource("7_ko6q3")]
+position = Vector2(-100, -100)
+
+[node name="BlueEnemy2" parent="MovingEnemies/Group6" instance=ExtResource("7_ko6q3")]
+position = Vector2(-75, -75)
+
+[node name="BlueEnemy3" parent="MovingEnemies/Group6" instance=ExtResource("7_ko6q3")]
+position = Vector2(-50, -50)
+
+[node name="BlueEnemy4" parent="MovingEnemies/Group6" instance=ExtResource("7_ko6q3")]
+position = Vector2(-25, -25)
+
+[node name="BlueEnemy5" parent="MovingEnemies/Group6" instance=ExtResource("7_ko6q3")]
+position = Vector2(25, -25)
+
+[node name="BlueEnemy6" parent="MovingEnemies/Group6" instance=ExtResource("7_ko6q3")]
+position = Vector2(50, -50)
+
+[node name="BlueEnemy7" parent="MovingEnemies/Group6" instance=ExtResource("7_ko6q3")]
+position = Vector2(75, -75)
+
+[node name="BlueEnemy8" parent="MovingEnemies/Group6" instance=ExtResource("7_ko6q3")]
+position = Vector2(100, -100)
+
+[node name="BlueEnemy9" parent="MovingEnemies/Group6" instance=ExtResource("7_ko6q3")]
+position = Vector2(-25, 25)
+
+[node name="BlueEnemy10" parent="MovingEnemies/Group6" instance=ExtResource("7_ko6q3")]
+position = Vector2(-50, 50)
+
+[node name="BlueEnemy11" parent="MovingEnemies/Group6" instance=ExtResource("7_ko6q3")]
+position = Vector2(-75, 75)
+
+[node name="BlueEnemy12" parent="MovingEnemies/Group6" instance=ExtResource("7_ko6q3")]
+position = Vector2(-100, 100)
+
+[node name="BlueEnemy13" parent="MovingEnemies/Group6" instance=ExtResource("7_ko6q3")]
+position = Vector2(25, 25)
+
+[node name="BlueEnemy14" parent="MovingEnemies/Group6" instance=ExtResource("7_ko6q3")]
+position = Vector2(50, 50)
+
+[node name="BlueEnemy15" parent="MovingEnemies/Group6" instance=ExtResource("7_ko6q3")]
+position = Vector2(75, 75)
+
+[node name="BlueEnemy16" parent="MovingEnemies/Group6" instance=ExtResource("7_ko6q3")]
+position = Vector2(100, 100)
+
+[node name="Doors" type="Node2D" parent="."]
+metadata/_edit_lock_ = true
+
+[node name="NormalDoors" type="Node2D" parent="Doors"]
+metadata/_edit_lock_ = true
+
+[node name="NormalDoor9" parent="Doors/NormalDoors" instance=ExtResource("10_rxdut")]
+position = Vector2(50, 500)
+door_id = 0
+horizontal_size = 2
+vertical_size = 6
+
+[node name="NormalDoor10" parent="Doors/NormalDoors" instance=ExtResource("10_rxdut")]
+position = Vector2(1350, 300)
+door_id = 1
+direction = 1
+horizontal_size = 2
+vertical_size = 2
+
+[node name="NormalDoor11" parent="Doors/NormalDoors" instance=ExtResource("10_rxdut")]
+position = Vector2(1150, 500)
+door_id = 2
+horizontal_size = 2
+vertical_size = 4
+
+[node name="GoldenDoors" type="Node2D" parent="Doors"]
+metadata/_edit_lock_ = true
+
+[node name="GoldenDoor2" parent="Doors/GoldenDoors" instance=ExtResource("11_j5g8c")]
+editor_description = "0 - Up
+1 - Left
+2 - Down
+3 - Right"
+position = Vector2(450, 500)
+coin_requirement = 4
+horizontal_size = 2
+vertical_size = 4
+
+[node name="GoldenDoor3" parent="Doors/GoldenDoors" instance=ExtResource("11_j5g8c")]
+editor_description = "0 - Up
+1 - Left
+2 - Down
+3 - Right"
+position = Vector2(800, 250)
+direction = 1
+horizontal_size = 2
+vertical_size = 2
+
+[node name="GoldenDoor4" parent="Doors/GoldenDoors" instance=ExtResource("11_j5g8c")]
+editor_description = "0 - Up
+1 - Left
+2 - Down
+3 - Right"
+position = Vector2(800, 750)
+coin_requirement = 8
+direction = 3
+horizontal_size = 2
+vertical_size = 2
+
+[node name="Walls" parent="." instance=ExtResource("12_bguky")]
+layer_0/tile_data = PackedInt32Array(393216, 65536, 2, 327680, 65536, 0, 917536, 131072, 2, 852000, 131072, 1, 786464, 131072, 1, 720928, 131072, 1, 524320, 131072, 1, 458784, 131072, 1, 393248, 131072, 1, 327712, 131072, 0, 917535, 65536, 2, 851999, 65536, 1, 786463, 65536, 1, 720927, 65536, 1, 524319, 65536, 1, 458783, 65536, 1, 393247, 65536, 1, 327711, 65536, 0, 917504, 65536, 2, 851968, 65536, 0, 983039, 0, 2, 917503, 0, 0, 327709, 393216, 2, 262173, 0, 1, 131101, 262144, 2, 65565, 196608, 1, 393244, 0, 2, 327708, 0, 0, 393245, 65536, 2, 393241, 131072, 2, 327705, 131072, 0, 393240, 65536, 2, 327704, 327680, 2, 393239, 327680, 1, 327703, 65536, 1, 393238, 0, 1, 327702, 393216, 4, 262167, 65536, 1, 262166, 0, 1, 393219, 131072, 2, 327683, 131072, 1, 262147, 327680, 1, 196611, 327680, 2, 393218, 65536, 2, 327682, 65536, 1, 262146, 393216, 2, 393217, 65536, 2, 327681, 393216, 2, 262150, 393216, 1, 196614, 327680, 2, 262149, 65536, 2, 196613, 393216, 2, 262148, 65536, 2, 196612, 65536, 0, 262151, 131072, 1, 196615, 131072, 0, 393223, 65536, 2, 327687, 327680, 2, 393222, 0, 2, 327686, 0, 1, 851969, 65536, 0, 917505, 393216, 1, 983041, 0, 1, 1048577, 0, 2, 1114114, 196608, 1, 1048578, 458752, 1, 983042, 131072, 1, 917506, 327680, 1, 851970, 65536, 0, 851971, 131072, 0, 917507, 131072, 2, 851974, 0, 0, 851975, 65536, 0, 917511, 393216, 1, 917510, 0, 2, 851976, 393216, 2, 917512, 65536, 1, 917513, 327680, 4, 851977, 131072, 1, 1114120, 131072, 1, 1048584, 131072, 1, 983048, 327680, 1, 1114119, 0, 1, 1048583, 0, 1, 983047, 0, 1, 786441, 131072, 0, 786440, 0, 0, 393224, 393216, 1, 458760, 0, 2, 393225, 131072, 1, 458761, 131072, 2, 327694, 131072, 2, 262158, 458752, 2, 131086, 196608, 1, 327693, 65536, 2, 262156, 262144, 4, 327691, 65536, 3, 327690, 327680, 3, 327689, 589824, 1, 262153, 0, 0, 327688, 65536, 0, 327701, 65536, 3, 327700, 327680, 3, 327699, 65536, 2, 262163, 65536, 0, 327698, 65536, 2, 327697, 0, 2, 262161, 0, 1, 458774, 0, 2, 458775, 131072, 2, 786455, 131072, 0, 786454, 0, 0, 851990, 0, 1, 851991, 327680, 2, 851992, 65536, 0, 851993, 131072, 0, 851998, 393216, 2, 917534, 65536, 2, 917533, 65536, 2, 917532, 262144, 1, 983068, 458752, 3, 1048603, 458752, 1, 983067, 327680, 0, 1048602, 0, 2, 983066, 393216, 0, 983065, 327680, 3, 1048600, 196608, 2, 983064, 262144, 1, 983062, 131072, 2, 1048594, 131072, 2, 1114129, 196608, 2, 1048593, 589824, 3, 1048592, 65536, 3, 1048591, 327680, 0, 1114126, 262144, 1, 1048590, 589824, 0, 1048589, 0, 2, 983054, 131072, 1, 917518, 131072, 0, 983053, 393216, 1, 917517, 65536, 0, 983052, 65536, 2, 917516, 65536, 0, 983051, 262144, 1, 917515, 393216, 0, 917514, 65536, 3, 983061, 262144, 1, 983059, 131072, 2, 983058, 327680, 1, 983057, 0, 1, 458782, 0, 1, 524318, 0, 1, 720926, 0, 1, 786462, 0, 1, 458751, 0, 2, 393215, 0, 0, 1179655, 0, 1, 1179650, 196608, 1, 1179662, 196608, 2, 1114127, 131072, 2, 1048587, 196608, 2, 983049, 131072, 2, 1048597, 196608, 2, 1114139, 196608, 2, 917521, 0, 0, 917522, 65536, 0, 917523, 327680, 0, 917524, 65536, 3, 917525, 393216, 0, 917526, 589824, 1, 917527, 65536, 2, 917528, 393216, 1, 917529, 131072, 1, 851996, 0, 0, 851997, 65536, 0, 131096, 131072, 1, 65560, 131072, 1, 131089, 196608, 1, 196628, 196608, 0, 262162, 327680, 2, 196626, 131072, 0, 262164, 458752, 4, 65553, 196608, 1, 196618, 196608, 1, 262154, 458752, 2, 131077, 0, 1, 131074, 262144, 4, 262174, 131072, 1, 393246, 393216, 1, 327710, 327680, 2, 196638, 131072, 1, 131102, 458752, 0, 655392, 131072, 1, 589856, 131072, 1, 655391, 65536, 1, 589855, 65536, 1, 655390, 0, 1, 589854, 0, 1, 29, 458752, 1, -65507, 131072, 0, 196637, 0, 1, 1245186, 524288, 2, 1245187, 393216, 0, 1245188, 65536, 0, 1245189, 65536, 0, 1245190, 65536, 0, 1245191, 393216, 2, 1245192, 65536, 1, 1310728, 65536, 2, 1310727, 65536, 2, 1310726, 65536, 2, 1310725, 65536, 2, 1310724, 65536, 2, 1310723, 65536, 2, 1310722, 65536, 2, 1310721, 0, 2, 1245185, 0, 0, 1179656, 327680, 2, 1245193, 327680, 2, 1310729, 65536, 2, 1310730, 131072, 2, 1179657, 131072, 0, 1245194, 131072, 0, 0, 131072, 2, -65536, 131072, 0, -1, 0, 0, 65535, 0, 2, 65538, 196608, 0, 196610, 0, 1, 131078, 131072, 0, 65541, 196608, 0, 262145, 0, 0, 131082, 196608, 0, 327692, 393216, 3, 196622, 196608, 1, 262157, 65536, 0, 196620, 196608, 0, 196630, 0, 1, 131094, 0, 0, 262168, 131072, 1, 196632, 458752, 1, 196631, 327680, 1, 131075, 131072, 0, 24, 327680, 1, 25, 65536, 2, 26, 65536, 2, 27, 65536, 2, 28, 65536, 2, -65508, 65536, 0, -65509, 65536, 0, -65510, 65536, 0, -65511, 65536, 0, -65512, 65536, 0, 131095, 393216, 2, 65559, 0, 1, 23, 0, 1, -65513, 0, 0, 17, 196608, 1, -65519, 196608, 0, 196625, 0, 1, 65550, 196608, 1, 14, 196608, 1, -65522, 196608, 0)
+metadata/_edit_lock_ = true

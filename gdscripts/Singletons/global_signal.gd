@@ -7,6 +7,7 @@ signal player_respawn
 # Checkpoints
 signal checkpoint_touched
 signal update_checkpoint
+signal finish
 
 # Collectibles
 signal coin_collected()

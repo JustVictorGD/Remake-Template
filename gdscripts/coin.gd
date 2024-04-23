@@ -39,9 +39,6 @@ func drop():
 	var tween = create_tween()
 	tween.tween_property($Sprite2D,"modulate:a", 1, 0.10)
 	
-	
-	#AreaManager.coin_dropped(coin_id)
-	
 	$CollisionShape2D.disabled = false
 
 func touched_by_player():
@@ -53,6 +50,7 @@ func touched_by_player():
 	
 	AreaManager.coin_collected(coin_id)
 	GlobalSignal.coin_collected.emit()
+	
 	GlobalSignal.update_checkpoint.emit()
 
 func checkpoint_touched():

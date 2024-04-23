@@ -1,4 +1,6 @@
 Node2D
+AnimationPlayer
+AnimationTree
 CollisionShape2D
 Sprite2D
 Area2D
@@ -10,5 +12,3 @@ AudioStreamPlayer
 AudioStreamPlayer2D
 Node
 Timer
-StaticBody2D
-ColorRect
