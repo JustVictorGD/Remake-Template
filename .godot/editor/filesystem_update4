@@ -1,8 +1,8 @@
 res://default_bus_layout.tres
+res://ui/gui.tscn
 res://levels/level_1/TheRight.tscn
 res://levels/level_1/TheTop.tscn
 res://levels/level_1/TheLeft.tscn
-res://levels/level_1/TheMiddle.tscn
 res://scenes/player.tscn
 res://scenes/sfx.tscn
 res://levels/ignored_files/TemplateArea.tscn
@@ -16,3 +16,7 @@ res://objects/checkpoint.tscn
 res://objects/finish.tscn
 res://objects/blue_enemy.tscn
 res://levels/level_1/TheBottom.tscn
+res://levels/level_1/TheMiddle.tscn
+res://ui/acd.gd
+res://gdscripts/Singletons/area_manager.gd
+res://gdscripts/Singletons/game_state.gd

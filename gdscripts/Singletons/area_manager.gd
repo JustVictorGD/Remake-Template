@@ -33,11 +33,13 @@ var next_coin_id := 0
 var next_key_id := 0
 var used_key_ids := []
 
-
+# Player
+var deaths := 0
 
 func player_respawn():
 	
 	current_checkpoint_can_update = false
+	deaths += 1
 	
 	for area in save_data[current_level]:
 		
@@ -140,6 +142,7 @@ var coordinates_data = {}
 
 
 func _ready():
+	get_window().size = Vector2i(1280, 720)
 	
 	GlobalSignal.player_respawn.connect(player_respawn)
 	GlobalSignal.checkpoint_touched.connect(checkpoint_touched)
