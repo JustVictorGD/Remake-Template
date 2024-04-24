@@ -1,7 +1,4 @@
 Node2D
-Control
-Label
-ColorRect
 AnimationPlayer
 AnimationTree
 CollisionShape2D
@@ -12,3 +9,6 @@ CanvasGroup
 Camera2D
 RemoteTransform2D
 AudioStreamPlayer
+AudioStreamPlayer2D
+Node
+Timer
