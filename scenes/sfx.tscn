@@ -9,6 +9,7 @@
 [ext_resource type="AudioStream" uid="uid://df4fjeckap46x" path="res://sfx/doorSoundTrim.mp3" id="7_6ptxg"]
 
 [node name="SFX" type="Node"]
+process_mode = 3
 script = ExtResource("1_hbj4l")
 
 [node name="EnemyDeath" type="AudioStreamPlayer" parent="."]

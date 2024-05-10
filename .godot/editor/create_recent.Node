@@ -1,5 +1,9 @@
 Node2D
 AnimationPlayer
+Control
+SubViewport
+Label
+ColorRect
 AnimationTree
 CollisionShape2D
 Sprite2D
@@ -8,7 +12,3 @@ TileMap
 CanvasGroup
 Camera2D
 RemoteTransform2D
-AudioStreamPlayer
-AudioStreamPlayer2D
-Node
-Timer

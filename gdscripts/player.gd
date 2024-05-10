@@ -32,6 +32,8 @@ func enemy_death():
 	death = true
 	invincible = true
 	
+	AreaManager.player_currently_dead = true
+	
 	var tween = create_tween()
 	tween.tween_property($CanvasGroup,"self_modulate:a", 0, 0.50)
 	SFX.play("EnemyDeath")
@@ -61,10 +63,13 @@ func finish():
 
 func _on_respawn_timer_timeout():
 	
+	AreaManager.player_currently_dead = false
+	
+	AreaManager.deaths += 1
 	GlobalSignal.player_respawn.emit()
 	
-	if AreaManager.current_area_path == AreaManager.respawn_area:
-		position = AreaManager.respawn_pos
+	if AreaManager.current_area_file_path == AreaManager.respawn["area_file_path"]:
+		position = AreaManager.respawn["position"]
 		
 		death = false
 		
@@ -73,9 +78,9 @@ func _on_respawn_timer_timeout():
 		$Extra50ms.start()
 	
 	else:
-		AreaManager.player_position = AreaManager.respawn_pos
+		AreaManager.player_position = AreaManager.respawn["position"]
 		AreaManager.player_previously_dead = true
-		get_tree().change_scene_to_file(AreaManager.respawn_area)
+		get_tree().change_scene_to_file(AreaManager.respawn["area_file_path"])
 
 func _on_extra_100_ms_timeout():
 	invincible = false
@@ -104,34 +109,35 @@ func _physics_process(delta):
 			position.y -= speed
 	
 	if Input.is_action_just_pressed("teleport") and can_teleport:
-		position = get_global_mouse_position()
+		position.x = get_global_mouse_position().x / (600.0 / (AreaManager.AREA_SIZE.y * 50)) - (160 / 0.6)
+		position.y = get_global_mouse_position().y / (600.0 / (AreaManager.AREA_SIZE.y * 50)) - (60 / 0.6)
 	
 	move_and_slide()
 	
 	
-	if position.y < 22:
-		AreaManager.area_up()
+	if position.y < 21:
+		AreaManager.travel_areas(Vector2i.UP)
 		
 		AreaManager.player_position.x = self.position.x
-		AreaManager.player_position.y = AreaManager.area_size.y * 50 - 22
+		AreaManager.player_position.y = AreaManager.AREA_SIZE.y * 50 - 22
 	
 	
-	if position.x < 22:
-		AreaManager.area_left()
+	if position.x < 21:
+		AreaManager.travel_areas(Vector2i.LEFT)
 		
-		AreaManager.player_position.x = AreaManager.area_size.x * 50 - 22
+		AreaManager.player_position.x = AreaManager.AREA_SIZE.x * 50 - 22
 		AreaManager.player_position.y = self.position.y
 	
 	
-	if position.y > AreaManager.area_size.y * 50 - 22:
-		AreaManager.area_down()
+	if position.y > AreaManager.AREA_SIZE.y * 50 - 21:
+		AreaManager.travel_areas(Vector2i.DOWN)
 		
 		AreaManager.player_position.x = self.position.x
 		AreaManager.player_position.y = 22
 	
 	
-	if position.x > AreaManager.area_size.x * 50 - 22:
-		AreaManager.area_right()
+	if position.x > AreaManager.AREA_SIZE.x * 50 - 21:
+		AreaManager.travel_areas(Vector2i.RIGHT)
 		
 		AreaManager.player_position.x = 22
 		AreaManager.player_position.y = self.position.y

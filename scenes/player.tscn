@@ -24,6 +24,7 @@ shape = SubResource("RectangleShape2D_hgmi6")
 
 [node name="CanvasGroup" type="CanvasGroup" parent="."]
 clip_children = 1
+texture_filter = 5
 
 [node name="Outline" type="Sprite2D" parent="CanvasGroup"]
 modulate = Color(0.4, 0, 0, 1)
@@ -64,13 +65,14 @@ one_shot = true
 
 [node name="Camera2D" type="Camera2D" parent="."]
 texture_filter = 2
+enabled = false
 limit_left = 0
 limit_top = 0
 limit_right = 1600
 limit_bottom = 1000
 position_smoothing_enabled = true
 
-[connection signal="area_entered" from="Player" to="." method="_on_area_2d_area_entered"]
 [connection signal="area_entered" from="Player" to="." method="_on_player_area_entered"]
+[connection signal="area_entered" from="Player" to="." method="_on_area_2d_area_entered"]
 [connection signal="timeout" from="RespawnTimer" to="." method="_on_respawn_timer_timeout"]
 [connection signal="timeout" from="Extra50ms" to="." method="_on_extra_100_ms_timeout"]

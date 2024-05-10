@@ -4,6 +4,11 @@
 
 [node name="Abyss" type="Node2D"]
 script = ExtResource("1_75ty8")
-coordinates = Vector2i(0, 1)
+coordinates = Vector2i(4, 2)
+bottom_text = "\"Simulation's End.\""
 
-[node name="Coins" type="Node2D" parent="."]
+[node name="Gameplay" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0

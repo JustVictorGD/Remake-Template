@@ -1,93 +1,155 @@
 extends Node2D
 
 
-# Variables for movement between areas
-var player_scene = load("res://scenes/player.tscn").instantiate()
-var area_size := Vector2(32, 20)
+const AREA_SIZE := Vector2(32, 20)
+
+# Position
 var player_position := Vector2(250, 850)
 var current_coordinates := Vector2i.ZERO
 
-# Checkpoints
-var respawn_pos := Vector2(250, 850)
-var respawn_area := ""
-var next_checkpoint_id := 0
 
-var current_checkpoint_id: int = 0
-var current_checkpoint_area: String = "res://levels/level_1/StartingRoom.tscn"
-var current_checkpoint_can_update: bool = false
+var respawn := {
+	"position": Vector2(250, 850),
+	"area_file_path": ""
+}
 
+var current_checkpoint := {
+	"id": 0,
+	"area_file_path": "res://levels/level_1/StartingRoom.tscn",
+	"can_update": false
+}
 
 # Useful data for multi-area
-var current_level := ""
-var current_area := ""
-var current_area_path := ""
+var current_level_name := ""
+var current_area_name := ""
+var current_area_file_path := ""
+var player_currently_dead := false
 var player_previously_dead := false
 
-# Coins
-var coins_collected := 0
-var coin_requirement := 0
-var requirement_met = false
-var next_coin_id := 0
+var money := {
+	"amount": 0,
+	"requirement": 0,
+	"satisfied": false
+}
 
-# Keys
-var next_key_id := 0
-var used_key_ids := []
+var object_id_generation := {
+	"coin": 0,
+	"key": 0,
+	"checkpoint": 0
+}
+
+var cutscene_info := {
+	"key_collected" = null,
+	"money_reached" = null
+}
+
+# Save system
+var save_data = {}
+var coordinates_data = {}
+
+var door_info := {}
+var money_thresholds := []
+
+# Other
+var deaths := 0
+var current_scene # The actual object
+
+var time := 0.0
+var total_seconds := 0
+
+var hours:= 0
+var minutes:= 0
+var seconds:= 0
+var milliseconds:= 0
+
+var time_string := ""
+var millisecond_string := ""
 
 
+
+var incrementing_number = 0
+
+func _physics_process(delta):
+	time += delta
+	
+	total_seconds = int(time)
+	@warning_ignore("integer_division")
+	hours = int(total_seconds / 3600)
+	
+	total_seconds -= hours * 3600
+	@warning_ignore("integer_division")
+	minutes = int(total_seconds / 60)
+	
+	total_seconds -= minutes * 60
+	seconds = total_seconds
+	
+	milliseconds = int(fmod(time, 1) * 1000)
+	
+	time_string = "%02d:%02d:%02d" % [hours, minutes, seconds]
+	millisecond_string = ".%03d" % [milliseconds]
+	
+	if incrementing_number % 4 == 0:
+		print("Money thresholds = " + str(money_thresholds))
+	
+	incrementing_number += 1
 
 func player_respawn():
+	current_checkpoint["can_update"] = false
 	
-	current_checkpoint_can_update = false
+	for area in save_data[current_level_name]:
+		for i in range(save_data[current_level_name][area]["coins"].size()):
+			if save_data[current_level_name][area]["coins"][i] == 1:
+				money["amount"] -= 1
+				save_data[current_level_name][area]["coins"][i] = 0
+				GlobalSignal.money_lost.emit()
+		
+		if area != current_area_name:
+			for i in range(save_data[current_level_name][area]["keys"].size()):
+				if save_data[current_level_name][area]["keys"][i].y == 1:
+					save_data[current_level_name][area]["keys"][i].y = 0
+					GlobalSignal.money_lost.emit()
 	
-	for area in save_data[current_level]:
-		
-		for i in range(save_data[current_level][area]["coins"].size()):
-			if save_data[current_level][area]["coins"][i] == 1:
-				coins_collected -= 1
-				save_data[current_level][area]["coins"][i] = 0
-		
-		if area != current_area:
-		
-			for i in range(save_data[current_level][area]["keys"].size()):
-				if save_data[current_level][area]["keys"][i].y != 2:
-					save_data[current_level][area]["keys"][i].y = 0
-	
-	if coins_collected < coin_requirement:
-		requirement_met = false
+	if money["amount"] < money["requirement"]:
+		money["satisfied"] = false
 		GlobalSignal.coin_requirement_lost.emit()
 
 func update_checkpoint():
-	current_checkpoint_can_update = true
+	current_checkpoint["can_update"] = true
 
 func coin_collected(coin_id):
-	save_data[current_level][current_area]["coins"][coin_id] = 1
-	coins_collected += 1
+	save_data[current_level_name][current_area_name]["coins"][coin_id] = 1
+	money["amount"] += 1
 	
-	if coins_collected >= coin_requirement:
-		requirement_met = true
-
+	if money["amount"] >= money["requirement"]:
+		money["satisfied"] = true
+	
+	for i in range(money_thresholds.size()):
+		if money["amount"] >= money_thresholds[i].x and money_thresholds[i].y == 0:
+			print(money["amount"])
+			print(money_thresholds)
+			
+			money_thresholds[i].y = 1
+			cutscene_info["money_reached"] = money_thresholds[i].x
+			check_golden_doors(money_thresholds[i].x)
+			print(cutscene_info)
 
 func key_collected(true_id):
-	save_data[current_level][current_area]["keys"][true_id].y = 1
-
+	save_data[current_level_name][current_area_name]["keys"][true_id].y = 1
 
 func checkpoint_touched():
-	for area in save_data[current_level]:
+	for area in save_data[current_level_name]:
+		for i in range(save_data[current_level_name][area]["coins"].size()):
+			if save_data[current_level_name][area]["coins"][i] == 1:
+				save_data[current_level_name][area]["coins"][i] = 2
 		
-		for i in range(save_data[current_level][area]["coins"].size()):
-			if save_data[current_level][area]["coins"][i] == 1:
-				save_data[current_level][area]["coins"][i] = 2
-		
-		for i in range(save_data[current_level][area]["keys"].size()):
-				if save_data[current_level][area]["keys"][i].y == 1:
-					save_data[current_level][area]["keys"][i].y = 2
-
+		for i in range(save_data[current_level_name][area]["keys"].size()):
+				if save_data[current_level_name][area]["keys"][i].y == 1:
+					save_data[current_level_name][area]["keys"][i].y = 2
 
 
 # Thanks Gemini for generating this for me
-var letters = ["Z", "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", \
+var letters := ["Z", "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", \
 "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y"]
-
 
 
 func decimal_to_letter(decimal):
@@ -112,137 +174,163 @@ func decimal_to_letter(decimal):
 		return minus_sign + letter_string
 
 
-func area_up():
-	for area in coordinates_data[current_level]:
-		if coordinates_data[current_level][area]["coordinates"] == current_coordinates + Vector2i.UP:
-			get_tree().change_scene_to_file(coordinates_data[current_level][area]["file_path"])
-
-func area_left():
-	for area in coordinates_data[current_level.trim_prefix("res://levels/")]:
-		if coordinates_data[current_level][area]["coordinates"] == current_coordinates + Vector2i.LEFT:
-			get_tree().change_scene_to_file(coordinates_data[current_level][area]["file_path"])
-
-func area_down():
-	for area in coordinates_data[current_level.trim_prefix("res://levels/")]:
-		if coordinates_data[current_level][area]["coordinates"] == current_coordinates + Vector2i.DOWN:
-			get_tree().change_scene_to_file(coordinates_data[current_level][area]["file_path"])
-
-func area_right():
-	for area in coordinates_data[current_level.trim_prefix("res://levels/")]:
-		if coordinates_data[current_level][area]["coordinates"] == current_coordinates + Vector2i.RIGHT:
-			get_tree().change_scene_to_file(coordinates_data[current_level][area]["file_path"])
-
-
-
-var save_data = {}
-var coordinates_data = {}
-
+func travel_areas(direction: Vector2i):
+	for area in coordinates_data[current_level_name]:
+		if coordinates_data[current_level_name][area]["coordinates"] == current_coordinates + direction:
+			get_tree().change_scene_to_file(coordinates_data[current_level_name][area]["file_path"])
 
 
 func _ready():
-	
 	GlobalSignal.player_respawn.connect(player_respawn)
 	GlobalSignal.checkpoint_touched.connect(checkpoint_touched)
 	GlobalSignal.update_checkpoint.connect(update_checkpoint)
 	
 	create_level_dictionaries()
 	
+	for i in range(money_thresholds.size()):
+		if money_thresholds[i] <= 0:
+			money_thresholds[i] += money["requirement"]
+	
+	money_thresholds.sort()
+	
 	print()
-	print(used_key_ids)
+	print("Door info: " + str(door_info))
 	print()
-
 
 
 func create_level_dictionaries():
-	
 	var master_dir = DirAccess.open("res://levels")
 	master_dir.list_dir_begin()
 	var main_folder = master_dir.get_next()
 	
-	
 	while main_folder.is_empty() == false:
 		if main_folder != "ignored_files":
-			
 			save_data[main_folder] = {}
 			coordinates_data[main_folder] = {}
+			door_info[main_folder] = {}
+		
 		main_folder = master_dir.get_next()
 	
-	
 	for level in save_data:
-		
 		create_area_dictionaries(level)
 
 
-
 func create_area_dictionaries(level):
-	
 	var the_level_dir = DirAccess.open("res://levels/" + str(level))
 	the_level_dir.list_dir_begin()
 	var area = the_level_dir.get_next()
 	
-	
 	while area.is_empty() == false:
-		
 		var area_name: String = str(area).trim_suffix(".tscn")
 		
 		save_data[level][area_name] = {}
-		
+		door_info[level][area_name] = {}
 		
 		if load("res://levels/" + str(level) + "/" + str(area)) != null:
-			
 			var new_area = load("res://levels/" + str(level) + "/" + str(area)).instantiate()
 			
 			coordinates_data[level][area_name] = {"coordinates" = new_area.coordinates,
-				"file_path" = "res://levels/" + str(level) + "/" + str(area)}
+			"file_path" = "res://levels/" + str(level) + "/" + str(area)}
+			
+			door_info[level][area_name]["area_file_path"] = new_area.scene_file_path
+			door_info[level][area_name]["normal_doors"] = []
+			door_info[level][area_name]["golden_doors"] = []
+			
+			if new_area.has_node("Gameplay/Doors/NormalDoors"):
+				for normal_door in new_area.get_node("Gameplay/Doors/NormalDoors").get_children():
+					door_info[level][area_name]["normal_doors"].append(Vector2i(normal_door.connection_id, int(normal_door.play_cutscene)))
+			
+			if new_area.has_node("Gameplay/Doors/GoldenDoors"):
+				for golden_door in new_area.get_node("Gameplay/Doors/GoldenDoors").get_children():
+					door_info[level][area_name]["golden_doors"].append(Vector2i(golden_door.money_requirement, int(golden_door.play_cutscene)))
+					AreaManager.money_thresholds.append(golden_door.money_requirement)
 			
 			create_save_arrays(level, area)
-		
 		
 		area = the_level_dir.get_next()
 
 
-
 func create_save_arrays(level, area):
-	
 	var loaded_area = load("res://levels/" + str(level) + "/" + str(area)).instantiate()
 	
 	save_data[level][area.trim_suffix(".tscn")]["coins"] = []
 	save_data[level][area.trim_suffix(".tscn")]["keys"] = []
 	
-	
-	if loaded_area.has_node("Collectables/Coins"):
+	if loaded_area.has_node("Gameplay/Collectables/Coins"):
+		var coins_folder = loaded_area.get_node("Gameplay/Collectables/Coins")
 		
-		var coins_folder = loaded_area.get_node("Collectables/Coins")
 		for node in coins_folder.get_children():
-			
 			save_data[str(level)][str(area).trim_suffix(".tscn")]["coins"].append(0)
-			coin_requirement += 1
+			money["requirement"] += 1
 	
-	
-	if loaded_area.has_node("Collectables/Keys"):
+	if loaded_area.has_node("Gameplay/Collectables/Keys"):
+		var keys_folder = loaded_area.get_node("Gameplay/Collectables/Keys")
 		
-		var keys_folder = loaded_area.get_node("Collectables/Keys")
 		for key in keys_folder.get_children():
-			
 			save_data[str(level)][str(area).trim_suffix(".tscn")]["keys"].append(Vector2i(key.key_id, 0))
+
+
+func check_normal_doors(key_id):
+	var cutscene_queue := []
 	
-	if loaded_area.has_node("Doors/NormalDoors"):
-		var doors_folder = loaded_area.get_node("Doors/NormalDoors")
-		for door in doors_folder.get_children():
-			
-			used_key_ids.append(door.door_id)
+	for area in door_info[current_level_name]:
+		for door in door_info[current_level_name][area]["normal_doors"]:
+			if door.y != 0 and door.x == key_id and door_info[current_level_name][area]["area_file_path"] not in cutscene_queue:
+				cutscene_queue.append(door_info[current_level_name][area]["area_file_path"])
+	
+	print("Cutscene queue: " + str(cutscene_queue))
+	
+	play_cutscene(cutscene_queue)
+
+
+func check_golden_doors(money_reached):
+	var cutscene_queue := []
+	
+	for area in door_info[current_level_name]:
+		for door in door_info[current_level_name][area]["golden_doors"]:
+			if door.y != 0 and door.x == money_reached and door_info[current_level_name][area]["area_file_path"] not in cutscene_queue:
+				cutscene_queue.append(door_info[current_level_name][area]["area_file_path"])
+	
+	print("Cutscene queue: " + str(cutscene_queue))
+	play_cutscene(cutscene_queue)
 
 
 
-func _physics_process(delta):
-	#print_stuff()
-	pass
-
-func print_stuff():
-	print("Save data: " + str(save_data))
-	print()
-	pass
-
-
-
+func play_cutscene(cutscene_queue):
+	var duration = Vector2(0.25, 0.75)
+	
+	await get_tree().create_timer(0.5).timeout
+	
+	if player_currently_dead:
+		return # Abort the function
+	
+	for area_path in cutscene_queue:
+		if current_area_file_path == area_path:
+			cutscene_queue.erase(current_area_file_path)
+	
+	if cutscene_queue.size() > 0:
+		duration *= ((cutscene_queue.size() + 1) * 0.5) / cutscene_queue.size()
+		print(duration)
+	
+	for area_path in cutscene_queue:
+		var new_area = load(area_path).instantiate()
+		new_area.in_cutscene = true
+		current_scene.add_sibling(new_area)
+		
+		current_scene.get_tree().paused = true
+		current_scene.visible = false
+		
+		await get_tree().create_timer(duration.x).timeout
+		
+		GlobalSignal.open_doors_in_cutscenes.emit()
+		
+		SFX.play("OpenDoor")
+		
+		await get_tree().create_timer(duration.y).timeout
+		
+		new_area.queue_free()
+		current_scene.get_tree().paused = false
+		current_scene.visible = true
+	
+	cutscene_info["key_collected"] = null
 

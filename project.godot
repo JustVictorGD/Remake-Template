@@ -16,12 +16,16 @@ config/features=PackedStringArray("4.2", "GL Compatibility")
 boot_splash/bg_color=Color(0.2, 0.282353, 0.482353, 1)
 config/icon="res://pngs and svgs/icon.svg"
 
+[audio]
+
+buses/default_bus_layout="res://other_resources/default_bus_layout.tres"
+
 [autoload]
 
-GameState="*res://gdscripts/Singletons/game_state.gd"
+GameState="*res://gdscripts/singletons/game_state.gd"
 SFX="*res://scenes/sfx.tscn"
-GlobalSignal="*res://gdscripts/Singletons/global_signal.gd"
-AreaManager="*res://gdscripts/Singletons/area_manager.gd"
+GlobalSignal="*res://gdscripts/singletons/global_signal.gd"
+AreaManager="*res://gdscripts/singletons/area_manager.gd"
 
 [debug]
 
@@ -29,9 +33,9 @@ gdscript/warnings/unused_parameter=0
 
 [display]
 
-window/size/viewport_width=1600
-window/size/viewport_height=1000
-window/stretch/mode="viewport"
+window/size/viewport_width=1280
+window/size/viewport_height=720
+window/stretch/mode="canvas_items"
 
 [input]
 
