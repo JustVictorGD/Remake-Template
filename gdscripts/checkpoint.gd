@@ -48,7 +48,7 @@ func activate():
 	
 	# Is the checkpoint a finish, and have you collected all of the money?
 	if type == CheckpointType.FINISH and AreaManager.money["satisfied"]:
-		print("W")
+		print("VICTORY!!!")
 		SFX.play("Finish")
 		GlobalSignal.finish.emit()
 	# Activate normally.

@@ -1,7 +1,6 @@
 res://other_resources/default_bus_layout.tres
 res://levels/level_1/TheRight.tscn
 res://gdscripts/area_script.gd
-res://gdscripts/singletons/area_manager.gd
 res://levels/level_1/TheTop.tscn
 res://levels/level_1/TheLeft.tscn
 res://levels/level_1/TheMiddle.tscn
@@ -16,3 +15,8 @@ res://objects/coin.tscn
 res://objects/blue_enemy.tscn
 res://scenes/sfx.tscn
 res://objects/checkpoint.tscn
+res://gdscripts/singletons/area_manager.gd
+res://gdscripts/coin.gd
+res://gdscripts/key.gd
+res://gdscripts/golden_door.gd
+res://gdscripts/checkpoint.gd

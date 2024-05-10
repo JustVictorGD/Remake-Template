@@ -16,7 +16,6 @@ func _ready():
 	GlobalSignal.checkpoint_touched.connect(checkpoint_touched)
 	
 	if AreaManager.save_data["level_1"][owner.name]["keys"][true_id].y != 0:
-		
 		stay_collected()
 
 
@@ -37,15 +36,13 @@ func touched_by_player():
 	$CollisionShape2D.set_deferred("disabled", true)
 	SFX.play("Key")
 	
-	AreaManager.check_normal_doors(key_id)
-	
-	AreaManager.save_data["level_1"][owner.name]["keys"][true_id].y = 1
-	AreaManager.cutscene_info["key_collected"] = self.key_id
-	
 	if key_id != -1:
 		GlobalSignal.key_collected.emit(key_id)
 	
 	GlobalSignal.update_checkpoint.emit()
+	AreaManager.save_data["level_1"][owner.name]["keys"][true_id].y = 1
+	AreaManager.check_normal_doors(key_id)
+	AreaManager.cutscene_info["key_collected"] = self.key_id
 
 
 

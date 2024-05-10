@@ -16,7 +16,7 @@ func _ready():
 	if self.money_requirement <= 0:
 		self.money_requirement = AreaManager.money["requirement"] + self.money_requirement
 	
-	if AreaManager.money["amount"] >= self.money_requirement and owner.in_cutscene == false:
+	if AreaManager.money["amount"] >= self.money_requirement:
 		stay_open()
 	
 	#if Vector2i(self.money_requirement, 0) not in AreaManager.money_requirements:
