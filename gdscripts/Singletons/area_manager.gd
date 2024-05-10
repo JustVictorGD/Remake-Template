@@ -67,8 +67,6 @@ var millisecond_string := ""
 
 
 
-var incrementing_number = 0
-
 func _physics_process(delta):
 	time += delta
 	
@@ -87,11 +85,6 @@ func _physics_process(delta):
 	
 	time_string = "%02d:%02d:%02d" % [hours, minutes, seconds]
 	millisecond_string = ".%03d" % [milliseconds]
-	
-	if incrementing_number % 4 == 0:
-		print("Money thresholds = " + str(money_thresholds))
-	
-	incrementing_number += 1
 
 func player_respawn():
 	current_checkpoint["can_update"] = false
@@ -124,14 +117,11 @@ func coin_collected(coin_id):
 		money["satisfied"] = true
 	
 	for i in range(money_thresholds.size()):
-		if money["amount"] >= money_thresholds[i].x and money_thresholds[i].y == 0:
-			print(money["amount"])
-			print(money_thresholds)
+		if money["amount"] >= money_thresholds[i]:
+			cutscene_info["money_reached"] = money_thresholds[i]
 			
-			money_thresholds[i].y = 1
-			cutscene_info["money_reached"] = money_thresholds[i].x
-			check_golden_doors(money_thresholds[i].x)
-			print(cutscene_info)
+			# This function is broken, and it seems that fixing it will take a while.
+			# check_golden_doors(money_thresholds[i])
 
 func key_collected(true_id):
 	save_data[current_level_name][current_area_name]["keys"][true_id].y = 1
@@ -193,9 +183,9 @@ func _ready():
 	
 	money_thresholds.sort()
 	
-	print()
-	print("Door info: " + str(door_info))
-	print()
+	#print()
+	#print("Door info: " + str(door_info))
+	#print()
 
 
 func create_level_dictionaries():
@@ -273,12 +263,12 @@ func create_save_arrays(level, area):
 func check_normal_doors(key_id):
 	var cutscene_queue := []
 	
+	
+	
 	for area in door_info[current_level_name]:
 		for door in door_info[current_level_name][area]["normal_doors"]:
 			if door.y != 0 and door.x == key_id and door_info[current_level_name][area]["area_file_path"] not in cutscene_queue:
 				cutscene_queue.append(door_info[current_level_name][area]["area_file_path"])
-	
-	print("Cutscene queue: " + str(cutscene_queue))
 	
 	play_cutscene(cutscene_queue)
 
@@ -291,7 +281,6 @@ func check_golden_doors(money_reached):
 			if door.y != 0 and door.x == money_reached and door_info[current_level_name][area]["area_file_path"] not in cutscene_queue:
 				cutscene_queue.append(door_info[current_level_name][area]["area_file_path"])
 	
-	print("Cutscene queue: " + str(cutscene_queue))
 	play_cutscene(cutscene_queue)
 
 
@@ -310,7 +299,6 @@ func play_cutscene(cutscene_queue):
 	
 	if cutscene_queue.size() > 0:
 		duration *= ((cutscene_queue.size() + 1) * 0.5) / cutscene_queue.size()
-		print(duration)
 	
 	for area_path in cutscene_queue:
 		var new_area = load(area_path).instantiate()
